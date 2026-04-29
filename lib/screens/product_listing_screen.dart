@@ -80,7 +80,8 @@ class ProductListingScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.3),
                         border: Border.all(color: Colors.grey.withOpacity(0.5)),
@@ -95,7 +96,8 @@ class ProductListingScreen extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.3),
                         border: Border.all(color: Colors.grey.withOpacity(0.5)),
@@ -304,7 +306,8 @@ class ProductListingScreen extends ConsumerWidget {
                   // Product Grid
                   Expanded(
                     child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
@@ -431,9 +434,11 @@ class ProductListingScreen extends ConsumerWidget {
               if (index < rating.floor()) {
                 return const Icon(Icons.star, color: Colors.yellow, size: 16);
               } else if (index == rating.floor() && rating % 1 != 0) {
-                return const Icon(Icons.star_half, color: Colors.yellow, size: 16);
+                return const Icon(Icons.star_half,
+                    color: Colors.yellow, size: 16);
               } else {
-                return Icon(Icons.star_border, color: selected ? Colors.yellow : Colors.grey, size: 16);
+                return Icon(Icons.star_border,
+                    color: selected ? Colors.yellow : Colors.grey, size: 16);
               }
             }),
           ),
@@ -475,7 +480,8 @@ class ProductListingScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProductCard(String name, String brand, double price, String imageUrl, List<String> specs, double rating) {
+  Widget _buildProductCard(String name, String brand, double price,
+      String imageUrl, List<String> specs, double rating) {
     return GestureDetector(
       onTap: () {
         // Navigate to product details
@@ -489,133 +495,141 @@ class ProductListingScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                    image: DecorationImage(
-                      image: NetworkImage(imageUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(Icons.favorite_border, color: Colors.white, size: 16),
-                  ),
-                ),
-                Positioned(
-                  bottom: 8,
-                  left: 8,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      'New Arrival',
-                      style: GoogleFonts.inter(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        letterSpacing: 0.5,
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(16)),
+                      image: DecorationImage(
+                        image: NetworkImage(imageUrl),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      brand.toUpperCase(),
-                      style: GoogleFonts.inter(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.grey[400],
-                        letterSpacing: 1.2,
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(20),
                       ),
+                      child: const Icon(Icons.favorite_border,
+                          color: Colors.white, size: 16),
                     ),
-                    Row(
-                      children: [
-                        const Icon(Icons.star, color: Colors.yellow, size: 12),
-                        const SizedBox(width: 2),
-                        Text(
-                          rating.toString(),
-                          style: GoogleFonts.inter(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        'New Arrival',
+                        style: GoogleFonts.inter(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          letterSpacing: 0.5,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  name,
-                  style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '\$${price.toStringAsFixed(0)}',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 4,
-                  children: specs.map((spec) => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF26364A),
-                      border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      spec,
-                      style: GoogleFonts.inter(
-                        fontSize: 10,
-                        color: Colors.grey[400],
                       ),
                     ),
-                  )).toList(),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        brand.toUpperCase(),
+                        style: GoogleFonts.inter(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey[400],
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.star,
+                              color: Colors.yellow, size: 12),
+                          const SizedBox(width: 2),
+                          Text(
+                            rating.toString(),
+                            style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    name,
+                    style: GoogleFonts.inter(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '\$${price.toStringAsFixed(0)}',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 4,
+                    children: specs
+                        .map((spec) => Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF26364A),
+                                border: Border.all(
+                                    color: Colors.grey.withOpacity(0.3)),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                spec,
+                                style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
   }
 }

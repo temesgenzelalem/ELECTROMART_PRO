@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import '../providers.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -102,18 +103,7 @@ class HomeScreen extends ConsumerWidget {
                     const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
-                        // Add sample product to cart
-                        ref.read(cartProvider.notifier).addItem(CartItem(
-                              id: 'sample-1',
-                              name: 'Precision X1 Series',
-                              imageUrl:
-                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuB5xjiG9H8JO7flNmiDEaR_zsyRJ9SfQVCUyWKS0o9TKs6XEcLibersio-v-nfOE025Wvvl9F3eG0fpfj-FJsTPKJ_f-al7z2rnvVJ8qEjf8nXdloIYxPPeACMxDEwc6swPkZfdtu2JjTBLIUDeOmbEI8rBqQbnjP-zLEDqEUKsi-Uod09vOjbVbV4JiAdUj0rmyDOjaPxUnO-OW6r8ulfYS9aL5mjgq0MDXXLyapOZLDuRiTXC2O_cWvlDELDv974G_r7ukNN5otc',
-                              price: 2999.00,
-                              quantity: 1,
-                            ));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Added to cart!')),
-                        );
+                        context.go('/product-details');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
@@ -189,8 +179,8 @@ class HomeScreen extends ConsumerWidget {
                           const SizedBox(width: 16),
                           Row(
                             children: [
-                              Icon(Icons.schedule,
-                                  color: const Color(0xFF4CD7F6), size: 16),
+                              const Icon(Icons.schedule,
+                                  color: Color(0xFF4CD7F6), size: 16),
                               const SizedBox(width: 4),
                               Text(
                                 '02:45:12',
@@ -325,8 +315,8 @@ class HomeScreen extends ConsumerWidget {
                         const SizedBox(height: 8),
                         Row(
                           children: [
-                            Icon(Icons.star,
-                                color: const Color(0xFF4CD7F6), size: 16),
+                            const Icon(Icons.star,
+                                color: Color(0xFF4CD7F6), size: 16),
                             const SizedBox(width: 4),
                             Text(
                               '4.9 (240 Reviews)',
@@ -357,17 +347,7 @@ class HomeScreen extends ConsumerWidget {
                         const SizedBox(height: 24),
                         ElevatedButton(
                           onPressed: () {
-                            ref.read(cartProvider.notifier).addItem(CartItem(
-                                  id: 'alpha-z1',
-                                  name: 'Alpha Station Z1',
-                                  imageUrl:
-                                      'https://lh3.googleusercontent.com/aida-public/AB6AXuB5xjiG9H8JO7flNmiDEaR_zsyRJ9SfQVCUyWKS0o9TKs6XEcLibersio-v-nfOE025Wvvl9F3eG0fpfj-FJsTPKJ_f-al7z2rnvVJ8qEjf8nXdloIYxPPeACMxDEwc6swPkZfdtu2JjTBLIUDeOmbEI8rBqQbnjP-zLEDqEUKsi-Uod09vOjbVbV4JiAdUj0rmyDOjaPxUnO-OW6r8ulfYS9aL5mjgq0MDXXLyapOZLDuRiTXC2O_cWvlDELDv974G_r7ukNN5otc',
-                                  price: 4299.00,
-                                  quantity: 1,
-                                ));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Added to cart!')),
-                            );
+                            context.go('/product-details');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -398,6 +378,26 @@ class HomeScreen extends ConsumerWidget {
         backgroundColor: Colors.black.withOpacity(0.8),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
+        currentIndex: 0, // Home selected
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              // Already on home
+              break;
+            case 1:
+              context.go('/products');
+              break;
+            case 2:
+              // Wishlist - not implemented yet
+              break;
+            case 3:
+              context.go('/cart');
+              break;
+            case 4:
+              context.go('/profile');
+              break;
+          }
+        },
         items: [
           const BottomNavigationBarItem(
             icon: Icon(Icons.home),

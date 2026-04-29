@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
+import '../providers.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends ConsumerWidget {
   const ProductDetailsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
@@ -370,6 +373,94 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      persistentFooterButtons: [
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              ref.read(cartProvider.notifier).addItem(CartItem(
+                    id: 'quantum-x17-elite',
+                    name: 'Quantum X17 Pro Elite',
+                    imageUrl:
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDTUGCAeAm6ulVRNaCNcVkqZ94TLJ5QIWROkxzftxXQA0dd4UGdYWxAeLohLSFPnh2MYzy5195ovipQgVwKxGhqhzVmpY6cOMltCb-uIDQKhbME0jNUBSRhhHA-JwnhzfhnDbdq9vg1Gl_i730r3q-rypLmaEqX2DfqEqv4C1nH9qA9neJm5l2MkMKLxB8LeJeAp5SFqKxg3nhVkZqqRNLeLUWiRXA1B8L1Uz-chAnDZlRYR15WJXnlgaxjCP0XDjwJ2rTlAufmipc',
+                    price: 3499.99,
+                    quantity: 1,
+                  ));
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Added to cart!')),
+              );
+            },
+            icon: const Icon(Icons.add_shopping_cart),
+            label: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                'ADD TO CART - \$3,499.99',
+                style: GoogleFonts.inter(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+        ),
+      ],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black.withOpacity(0.8),
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        currentIndex: 1, // Explore selected
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              context.go('/');
+              break;
+            case 1:
+              context.go('/products');
+              break;
+            case 2:
+              // Wishlist - not implemented yet
+              break;
+            case 3:
+              context.go('/cart');
+              break;
+            case 4:
+              context.go('/profile');
+              break;
+          }
+        },
+        items: [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: 'Explore',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Wishlist',
+          ),
+          BottomNavigationBarItem(
+            icon: Badge(
+              label: Text(ref.watch(cartProvider).length.toString()),
+              child: const Icon(Icons.shopping_cart),
+            ),
+            label: 'Cart',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
