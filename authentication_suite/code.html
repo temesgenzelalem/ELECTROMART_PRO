@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Authentication Suite | ElectroMart Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-background": "#d3e4fe",
+                  "surface-container-highest": "#26364a",
+                  "inverse-on-surface": "#213145",
+                  "primary-fixed": "#dae2fd",
+                  "on-tertiary-container": "#008da5",
+                  "tertiary-container": "#001b21",
+                  "on-tertiary-fixed-variant": "#004e5c",
+                  "tertiary": "#4cd7f6",
+                  "on-surface-variant": "#c6c6cd",
+                  "on-tertiary-fixed": "#001f26",
+                  "inverse-surface": "#d3e4fe",
+                  "on-primary-fixed-variant": "#3f465c",
+                  "surface-container": "#102034",
+                  "background": "#031427",
+                  "on-primary-fixed": "#131b2e",
+                  "on-tertiary": "#003640",
+                  "on-error-container": "#ffdad6",
+                  "outline-variant": "#45464d",
+                  "surface-container-high": "#1b2b3f",
+                  "secondary": "#adc6ff",
+                  "primary-container": "#0f172a",
+                  "on-primary-container": "#798098",
+                  "on-secondary-container": "#e6ecff",
+                  "secondary-container": "#0566d9",
+                  "inverse-primary": "#565e74",
+                  "on-secondary-fixed-variant": "#004395",
+                  "on-error": "#690005",
+                  "error": "#ffb4ab",
+                  "primary-fixed-dim": "#bec6e0",
+                  "surface": "#031427",
+                  "surface-dim": "#031427",
+                  "outline": "#909097",
+                  "tertiary-fixed-dim": "#4cd7f6",
+                  "on-primary": "#283044",
+                  "surface-tint": "#bec6e0",
+                  "on-secondary-fixed": "#001a42",
+                  "on-secondary": "#002e6a",
+                  "secondary-fixed": "#d8e2ff",
+                  "surface-variant": "#26364a",
+                  "surface-bright": "#2a3a4f",
+                  "surface-container-low": "#0b1c30",
+                  "error-container": "#93000a",
+                  "primary": "#bec6e0",
+                  "surface-container-lowest": "#000f21",
+                  "tertiary-fixed": "#acedff",
+                  "secondary-fixed-dim": "#adc6ff",
+                  "on-surface": "#d3e4fe"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "md": "1.5rem",
+                  "xl": "4rem",
+                  "xs": "0.5rem",
+                  "unit": "4px",
+                  "gutter": "1.5rem",
+                  "container-max": "1440px",
+                  "sm": "1rem",
+                  "lg": "2.5rem"
+          },
+          "fontFamily": {
+                  "code": ["Space Grotesk"],
+                  "body-md": ["Inter"],
+                  "h3": ["Inter"],
+                  "h1": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "h2": ["Inter"],
+                  "label-sm": ["Inter"]
+          },
+          "fontSize": {
+                  "code": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}],
+                  "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "h2": ["30px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "label-sm": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-surface {
+      background: rgba(16, 32, 52, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .luminous-border {
+      box-shadow: inset 0 1px 0 0 rgba(172, 237, 255, 0.1);
+    }
+    .primary-gradient {
+      background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%);
+    }
+    .otp-input:focus {
+      box-shadow: 0 0 15px -3px rgba(59, 130, 246, 0.5);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<header class="sticky top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.3)]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500" data-icon="bolt">bolt</span>
+<span class="text-xl font-black tracking-tighter text-slate-50 uppercase font-inter">ElectroMart Pro</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors rounded-full active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</header>
+<main class="container mx-auto px-6 py-lg grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<section class="lg:col-span-4 space-y-gutter">
+<div class="glass-surface p-md rounded-xl luminous-border">
+<div class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface mb-2">Welcome Back</h2>
+<p class="text-on-primary-container font-body-md">Login to manage your enterprise procurement.</p>
+</div>
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">EMAIL ADDRESS</label>
+<div class="relative">
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary-container focus:border-secondary outline-none transition-all placeholder:opacity-30" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant">PASSWORD</label>
+<a class="text-label-sm text-secondary hover:underline" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary-container focus:border-secondary outline-none transition-all" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<button class="w-full primary-gradient text-on-secondary font-bold py-3 rounded-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 transition-all duration-200">
+            Login to Account
+          </button>
+</form>
+<div class="relative my-lg">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant"></div></div>
+<div class="relative flex justify-center text-xs uppercase"><span class="bg-surface-container px-2 text-on-primary-container font-label-sm">Or continue with</span></div>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<button class="flex items-center justify-center gap-2 bg-surface-container border border-outline-variant py-2.5 rounded-lg hover:bg-surface-container-high transition-colors active:scale-95">
+<img alt="Google Logo" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9MhN27N5rCqyFeX3CO9PlPfhS3dHCxeH10m525cujOf8WxehrHJT2i8_A3Rko0EWcAc5EsIdiik5liZrzcJ898llVqgZziYgeQ3wNF0D7jtUvr2mxuaoMhwzUh0RWmc73ZcvHUTKidWrGRmZSnw7rrkj5H4zyyniByu0Agga9iQv7cEXly7tpRasbQZX0Hrc5Lb4wRYTYWy0x9c1QCQCehQJTFXk6mIS2YXHQTAL6yb9dz2gdA-vrtUa4b3m9iQNl0gKSOgEPR7A"/>
+<span class="font-label-sm">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 bg-surface-container border border-outline-variant py-2.5 rounded-lg hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-xl" data-icon="apple">ios</span>
+<span class="font-label-sm">Apple</span>
+</button>
+</div>
+</div>
+</section>
+<section class="lg:col-span-4 space-y-gutter">
+<div class="glass-surface p-md rounded-xl luminous-border relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<span class="flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+</div>
+<div class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface mb-2">Create Account</h2>
+<p class="text-on-primary-container font-body-md">Join the professional hardware network.</p>
+</div>
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">FULL NAME</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary-container outline-none transition-all" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">CORPORATE EMAIL</label>
+<input class="w-full bg-surface-container border border-error rounded-lg px-4 py-3 outline-none transition-all" placeholder="john@enterprise.com" type="email"/>
+<p class="text-error text-[12px] font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+              This email is already registered.
+            </p>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">SECURE PASSWORD</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary-container outline-none transition-all" placeholder="Minimum 8 characters" type="password"/>
+</div>
+<div class="flex items-start gap-2 pt-2">
+<input class="mt-1 rounded border-outline-variant bg-surface-container text-secondary-container focus:ring-0" type="checkbox"/>
+<label class="text-[12px] text-on-primary-container">
+              I agree to the <a class="text-secondary underline" href="#">Terms of Service</a> and <a class="text-secondary underline" href="#">Privacy Protocol</a>.
+            </label>
+</div>
+<button class="w-full primary-gradient text-on-secondary font-bold py-3 rounded-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 transition-all duration-200">
+            Provision Account
+          </button>
+</form>
+</div>
+</section>
+<section class="lg:col-span-4 space-y-gutter">
+<div class="glass-surface p-md rounded-xl luminous-border border-tertiary/20">
+<div class="mb-lg">
+<div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="vibration">vibration</span>
+</div>
+<h2 class="font-h2 text-h2 text-on-surface mb-2">Phone Verification</h2>
+<p class="text-on-primary-container font-body-md">Security protocol required for hardware high-value orders.</p>
+</div>
+<div class="space-y-lg">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">MOBILE NUMBER</label>
+<div class="flex gap-2">
+<div class="w-24 bg-surface-container border border-outline-variant rounded-lg px-3 py-3 flex items-center justify-between cursor-pointer">
+<span class="text-on-surface font-label-sm">🇺🇸 +1</span>
+<span class="material-symbols-outlined text-xs" data-icon="expand_more">expand_more</span>
+</div>
+<input class="flex-1 bg-surface-container border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-tertiary outline-none transition-all" placeholder="555-0123" type="tel"/>
+</div>
+</div>
+<div class="space-y-md">
+<label class="font-label-sm text-label-sm text-on-surface-variant block text-center">ENTER 6-DIGIT SECURITY CODE</label>
+<div class="flex justify-between gap-2">
+<input class="otp-input w-11 h-14 bg-surface-container border border-outline-variant rounded-xl text-center text-xl font-bold text-tertiary outline-none focus:border-tertiary transition-all" maxlength="1" type="text" value="4"/>
+<input class="otp-input w-11 h-14 bg-surface-container border border-outline-variant rounded-xl text-center text-xl font-bold text-tertiary outline-none focus:border-tertiary transition-all" maxlength="1" type="text" value="8"/>
+<input class="otp-input w-11 h-14 bg-surface-container border border-outline-variant rounded-xl text-center text-xl font-bold text-tertiary outline-none focus:border-tertiary transition-all" maxlength="1" type="text" value="2"/>
+<input class="otp-input w-11 h-14 bg-surface-container border border-outline-variant rounded-xl text-center text-xl font-bold text-tertiary outline-none focus:border-tertiary transition-all" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-14 bg-surface-container border border-outline-variant rounded-xl text-center text-xl font-bold text-tertiary outline-none focus:border-tertiary transition-all" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-14 bg-surface-container border border-outline-variant rounded-xl text-center text-xl font-bold text-tertiary outline-none focus:border-tertiary transition-all" maxlength="1" type="text"/>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="text-[12px] font-code text-on-primary-container flex items-center gap-2 bg-surface-container-highest px-4 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+                Resend code in <span class="text-tertiary font-bold">01:58</span>
+</div>
+<button class="text-label-sm text-on-primary-container opacity-50 cursor-not-allowed">Resend Now</button>
+</div>
+</div>
+<button class="w-full bg-tertiary/20 text-tertiary border border-tertiary/30 font-bold py-3 rounded-lg hover:bg-tertiary/30 active:scale-95 transition-all duration-200 uppercase tracking-widest text-[12px]">
+            Verify Identity
+          </button>
+</div>
+</div>
+</section>
+</main>
+<aside class="fixed bottom-gutter right-gutter z-40 max-w-sm hidden md:block">
+<div class="glass-surface p-sm rounded-xl luminous-border border-blue-500/30 flex gap-4 items-center">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-tech microprocessor with glowing blue circuits in a dark lab setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwLSSXHw4PLwj_Ft5nt4zJoHT4EumWmaHDWQ4zgTkj-oUW3Dfx9GsxoV1DJT7Z8VYBXHl3o0rLurNWzrtA0QhwErlCYMalQzUZjQeqBk-2yDOjPh8VMb2cdSGcSzySGjFW2RkWM4hvRUeS0vjJVX_5k1nefTqT8lW_7ffE4j5iolNPEVIpdB67OmtUvRyrCIdDaMyi4rUnhrRynFAbF0gjY7r6KCAvIyxq3bY-1fegoWBzC8lvR6q3NeeOX1ytwyHIZq0_5FJh5uk"/>
+</div>
+<div>
+<h4 class="font-label-sm text-on-surface">Secure Protocol Active</h4>
+<p class="text-[12px] text-on-primary-container leading-tight">All authentication data is encrypted with AES-256 standards.</p>
+</div>
+</div>
+</aside>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl rounded-t-2xl border-t border-slate-800/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] md:hidden">
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-blue-400 font-bold bg-blue-500/10 rounded-xl px-3 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Profile</span>
+</div>
+</nav>
+</body></html>

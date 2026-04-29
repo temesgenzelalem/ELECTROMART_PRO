@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#d3e4fe",
+                      "surface-container-highest": "#26364a",
+                      "inverse-on-surface": "#213145",
+                      "primary-fixed": "#dae2fd",
+                      "on-tertiary-container": "#008da5",
+                      "tertiary-container": "#001b21",
+                      "on-tertiary-fixed-variant": "#004e5c",
+                      "tertiary": "#4cd7f6",
+                      "on-surface-variant": "#c6c6cd",
+                      "on-tertiary-fixed": "#001f26",
+                      "inverse-surface": "#d3e4fe",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "surface-container": "#102034",
+                      "background": "#031427",
+                      "on-primary-fixed": "#131b2e",
+                      "on-tertiary": "#003640",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#45464d",
+                      "surface-container-high": "#1b2b3f",
+                      "secondary": "#adc6ff",
+                      "primary-container": "#0f172a",
+                      "on-primary-container": "#798098",
+                      "on-secondary-container": "#e6ecff",
+                      "secondary-container": "#0566d9",
+                      "inverse-primary": "#565e74",
+                      "on-secondary-fixed-variant": "#004395",
+                      "on-error": "#690005",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#bec6e0",
+                      "surface": "#031427",
+                      "surface-dim": "#031427",
+                      "outline": "#909097",
+                      "tertiary-fixed-dim": "#4cd7f6",
+                      "on-primary": "#283044",
+                      "surface-tint": "#bec6e0",
+                      "on-secondary-fixed": "#001a42",
+                      "on-secondary": "#002e6a",
+                      "secondary-fixed": "#d8e2ff",
+                      "surface-variant": "#26364a",
+                      "surface-bright": "#2a3a4f",
+                      "surface-container-low": "#0b1c30",
+                      "error-container": "#93000a",
+                      "primary": "#bec6e0",
+                      "surface-container-lowest": "#000f21",
+                      "tertiary-fixed": "#acedff",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "on-surface": "#d3e4fe"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "1.5rem",
+                      "xl": "4rem",
+                      "xs": "0.5rem",
+                      "unit": "4px",
+                      "gutter": "1.5rem",
+                      "container-max": "1440px",
+                      "sm": "1rem",
+                      "lg": "2.5rem"
+              },
+              "fontFamily": {
+                      "code": ["Space Grotesk"],
+                      "body-md": ["Inter"],
+                      "h3": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "h2": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "code": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}],
+                      "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "h2": ["30px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-sm": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(16, 32, 52, 0.6);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(186, 230, 253, 0.1);
+        }
+        .zebra-row:nth-child(even) {
+            background-color: rgba(38, 54, 74, 0.3);
+        }
+        .pulse-cyan {
+            box-shadow: 0 0 0 0 rgba(76, 215, 246, 0.4);
+            animation: pulse-cyan 2s infinite;
+        }
+        @keyframes pulse-cyan {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 215, 246, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(76, 215, 246, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 215, 246, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.3)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-500 dark:text-blue-400" data-icon="bolt">bolt</span>
+<h1 class="text-xl font-black tracking-tighter text-slate-50 uppercase font-inter">ElectroMart Pro</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors active:scale-95 transition-transform duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-gutter py-md lg:py-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Cart List Section -->
+<div class="lg:col-span-8 space-y-md">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-h2 text-h2 text-on-surface">Your Procurement Cart</h2>
+<span class="font-label-sm text-label-sm px-3 py-1 bg-surface-container-highest rounded-full text-tertiary">3 ITEMS</span>
+</div>
+<!-- Price Drop Alert -->
+<div class="flex items-center gap-3 p-4 bg-tertiary-container/30 border border-tertiary/20 rounded-xl">
+<span class="material-symbols-outlined text-tertiary animate-pulse" data-icon="trending_down">trending_down</span>
+<p class="font-label-sm text-label-sm text-tertiary">Technical Advisory: Price drop detected on <span class="font-bold">NVIDIA H100 GPU</span> cluster.</p>
+</div>
+<!-- Cart Items -->
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="group relative flex flex-col md:flex-row gap-md p-md glass-panel rounded-xl border border-outline/10 hover:border-secondary/30 transition-all duration-300">
+<div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container-lowest rounded-lg overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="high-end graphics card close up with glowing blue neon lights on a dark brushed metal surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvcS43pRvozud-rC4plwx0RFkP1zVje-0HdBj-upOpa_PduGi3AcQqIk3Pt_PdgPMJLNtA5UF7XeGSRveKzD6xiz42YAUkwP6JDzLFDYrW4VeoSPcAokrkwmLqCOhfLSDHjC5--XoXEPD11I9H4Oo_ZxaoGBYNktFPRI4-R-Rhiw58Zu5uDf__PjZjGVsO3RuOgd0vs29KNzCPYxmMmRGjZUilHaOZnie9bWSiUwn6_2_9dnC8mmwCxX57-wt0TITGytpi5X3RgAQ"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">NVIDIA H100 Tensor Core</h3>
+<p class="font-label-sm text-label-sm text-on-primary-container">Variant: 80GB HBM3 | SKU: NV-H100-80</p>
+</div>
+<span class="font-h3 text-h3 text-secondary">$32,499.00</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center bg-surface-container-lowest rounded-lg p-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span></button>
+<span class="w-12 text-center font-code text-code">1</span>
+<button class="w-8 h-8 flex items-center justify-center hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span></button>
+</div>
+<button class="flex items-center gap-2 text-error hover:text-on-error transition-colors px-3 py-1.5 rounded-lg hover:bg-error-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete_sweep">delete_sweep</span>
+<span class="font-label-sm text-label-sm">REMOVE</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative flex flex-col md:flex-row gap-md p-md glass-panel rounded-xl border border-outline/10 hover:border-secondary/30 transition-all duration-300">
+<div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container-lowest rounded-lg overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="professional ultrawide monitor displaying complex code and data visualizations in a dark futuristic room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeuT8VNC3xPEiPnaq8JQmbVSzJcSvrrYcprv2auaPBM4PQQIA4fQmNZTNfdcj4qzgBLk8hKiFV_KNZaLhcFg_x0Fs9Pe3wORAAJXuK_BtpeVorltZVDdVhmQI0Z8SLxlbwBpbHXvSWme5ORhyqZ3MsOwpny6W7U2Yrva6HhqqVznCiJ-7NRVEFF0A4Z3wiOR3x1MPh-HA-P65szFw8hMx4Gi03HVEgFfOyTFFb-wNjsJYSIMrqTXqQnW_srMq-NMNSNfoRouP8F1g"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">ProArt Display PA32UCG-K</h3>
+<p class="font-label-sm text-label-sm text-on-primary-container">Variant: 32-inch 4K HDR | SKU: AS-PA32-HDR</p>
+</div>
+<div class="text-right">
+<span class="font-h3 text-h3 text-secondary">$4,999.00</span>
+<div class="text-[10px] text-tertiary flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_downward">arrow_downward</span> 15% PRICE DROP
+                                </div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center bg-surface-container-lowest rounded-lg p-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span></button>
+<span class="w-12 text-center font-code text-code">2</span>
+<button class="w-8 h-8 flex items-center justify-center hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span></button>
+</div>
+<button class="flex items-center gap-2 text-error hover:text-on-error transition-colors px-3 py-1.5 rounded-lg hover:bg-error-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete_sweep">delete_sweep</span>
+<span class="font-label-sm text-label-sm">REMOVE</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group relative flex flex-col md:flex-row gap-md p-md glass-panel rounded-xl border border-outline/10 hover:border-secondary/30 transition-all duration-300">
+<div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container-lowest rounded-lg overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="latest generation tablet computer with stylus on a clean desk with soft professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_C-vnSJyKafRnz7OjqwOJM13giHfZ_fWD6PLFlzkdfXe8m7EeOASv0wOsRKdsAhf1BcEKy_5yvoTIWAei2r74wiJN49YuviyNV56SM89OY4NS554bvmyaFab-mUi8FW2IkWITQuNs5AKGi6PFzu3Dli74ofjwyeixliT6tcTDyX9jiqrdMO_KnQCmVd2f_0r1sWhlkcanbrv-NILX3PmDj-WeXWpSVsYNdMD8uq3thbgE4fKYzHHIbVOxjJlRzNkGuQJ6Rsyq1ms"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Precision Workstation X7</h3>
+<p class="font-label-sm text-label-sm text-on-primary-container">Variant: 128GB RAM / 4TB NVMe | SKU: DE-PW-X7</p>
+</div>
+<span class="font-h3 text-h3 text-secondary">$8,250.00</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center bg-surface-container-lowest rounded-lg p-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span></button>
+<span class="w-12 text-center font-code text-code">1</span>
+<button class="w-8 h-8 flex items-center justify-center hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span></button>
+</div>
+<button class="flex items-center gap-2 text-error hover:text-on-error transition-colors px-3 py-1.5 rounded-lg hover:bg-error-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete_sweep">delete_sweep</span>
+<span class="font-label-sm text-label-sm">REMOVE</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary & Sidebar -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Summary Card -->
+<div class="p-lg glass-panel rounded-2xl border border-white/5 shadow-2xl space-y-6">
+<h2 class="font-h3 text-h3 text-on-surface border-b border-white/10 pb-4">Order Summary</h2>
+<div class="space-y-3">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-primary-container">Subtotal</span>
+<span class="text-on-surface">$50,747.00</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-primary-container">Sales Tax (EST)</span>
+<span class="text-on-surface">$4,186.63</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-primary-container">Expedited Shipping</span>
+<span class="text-tertiary">FREE</span>
+</div>
+</div>
+<!-- Free Shipping Progress -->
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold tracking-wider uppercase">
+<span class="text-tertiary">Enterprise Free Shipping Active</span>
+<span class="text-on-primary-container">100%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary-container to-tertiary w-full"></div>
+</div>
+</div>
+<!-- Coupon Section -->
+<div class="pt-4 border-t border-white/10 space-y-3">
+<label class="font-label-sm text-label-sm text-on-primary-container">PROMO CODE</label>
+<div class="flex gap-2">
+<input class="bg-surface-container-lowest border-outline-variant text-on-surface focus:ring-secondary focus:border-secondary rounded-lg flex-grow font-code placeholder:text-outline-variant text-sm px-4" placeholder="ENTER CODE" type="text"/>
+<button class="bg-surface-container-highest text-secondary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-secondary/10 transition-all">APPLY</button>
+</div>
+</div>
+<div class="pt-6 border-t border-white/10">
+<div class="flex justify-between items-end mb-8">
+<span class="font-label-sm text-label-sm text-on-primary-container">TOTAL DUE</span>
+<span class="text-[32px] font-bold leading-none text-secondary tracking-tight">$54,933.63</span>
+</div>
+<button class="w-full py-5 bg-gradient-to-b from-blue-500 to-blue-700 text-white rounded-xl font-h3 text-h3 flex items-center justify-center gap-3 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+                        PROCEED TO CHECKOUT
+                    </button>
+<p class="text-center mt-4 text-[10px] text-on-primary-container uppercase tracking-widest font-medium">
+                        Secured with 256-bit AES Encryption
+                    </p>
+</div>
+</div>
+<!-- Side Info: Empty State Preview (Small) -->
+<div class="p-md glass-panel rounded-xl border border-white/5 opacity-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500" data-icon="inventory_2">inventory_2</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">QUICK REORDER</p>
+<p class="text-[10px] text-on-primary-container">View frequent hardware lists</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Message / Bottom Float (Simulated for visual depth) -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 bg-surface-container-high/90 border border-secondary/20 px-6 py-3 rounded-full flex items-center gap-4 backdrop-blur-md shadow-2xl">
+<div class="w-2 h-2 rounded-full bg-tertiary pulse-cyan"></div>
+<p class="font-label-sm text-label-sm text-on-surface whitespace-nowrap">System Status: <span class="text-tertiary">Optimized Pricing Applied</span></p>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl rounded-t-2xl border-t border-slate-800/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all font-inter text-[10px] font-medium tracking-wide active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all font-inter text-[10px] font-medium tracking-wide active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span>Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all font-inter text-[10px] font-medium tracking-wide active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span>Wishlist</span>
+</div>
+<div class="flex flex-col items-center justify-center text-blue-400 font-bold bg-blue-500/10 rounded-xl px-3 py-1 font-inter text-[10px] tracking-wide active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span>Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all font-inter text-[10px] font-medium tracking-wide active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</div>
+</nav>
+<!-- Overlay FAB (Suppressed on Cart screen per guidelines) -->
+</body></html>

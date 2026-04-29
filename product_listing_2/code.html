@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ElectroMart Pro | Enterprise Electronics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#d3e4fe",
+                    "surface-container-highest": "#26364a",
+                    "inverse-on-surface": "#213145",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#008da5",
+                    "tertiary-container": "#001b21",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "tertiary": "#4cd7f6",
+                    "on-surface-variant": "#c6c6cd",
+                    "on-tertiary-fixed": "#001f26",
+                    "inverse-surface": "#d3e4fe",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-container": "#102034",
+                    "background": "#031427",
+                    "on-primary-fixed": "#131b2e",
+                    "on-tertiary": "#003640",
+                    "on-error-container": "#ffdad6",
+                    "outline-variant": "#45464d",
+                    "surface-container-high": "#1b2b3f",
+                    "secondary": "#adc6ff",
+                    "primary-container": "#0f172a",
+                    "on-primary-container": "#798098",
+                    "on-secondary-container": "#e6ecff",
+                    "secondary-container": "#0566d9",
+                    "inverse-primary": "#565e74",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface": "#031427",
+                    "surface-dim": "#031427",
+                    "outline": "#909097",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "on-primary": "#283044",
+                    "surface-tint": "#bec6e0",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#002e6a",
+                    "secondary-fixed": "#d8e2ff",
+                    "surface-variant": "#26364a",
+                    "surface-bright": "#2a3a4f",
+                    "surface-container-low": "#0b1c30",
+                    "error-container": "#93000a",
+                    "primary": "#bec6e0",
+                    "surface-container-lowest": "#000f21",
+                    "tertiary-fixed": "#acedff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-surface": "#d3e4fe"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1.5rem",
+                    "xl": "4rem",
+                    "xs": "0.5rem",
+                    "unit": "4px",
+                    "gutter": "1.5rem",
+                    "container-max": "1440px",
+                    "sm": "1rem",
+                    "lg": "2.5rem"
+            },
+            "fontFamily": {
+                    "code": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h2": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "code": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h2": ["30px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-surface {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .luminous-edge {
+            box-shadow: inset 0 1px 0 0 rgba(59, 130, 246, 0.2);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(38, 54, 74, 0) 0%, rgba(38, 54, 74, 0.5) 50%, rgba(38, 54, 74, 0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer-anim 1.5s infinite;
+        }
+        @keyframes shimmer-anim {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.3)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-500 text-2xl" data-icon="bolt">bolt</span>
+<h1 class="text-xl font-black tracking-tighter text-slate-50 uppercase">ElectroMart Pro</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-blue-400 font-inter tracking-tight font-semibold text-sm" href="#">Products</a>
+<a class="text-slate-400 hover:bg-slate-800/50 transition-colors rounded-lg px-3 py-1 text-sm font-inter tracking-tight font-semibold" href="#">Orders</a>
+<a class="text-slate-400 hover:bg-slate-800/50 transition-colors rounded-lg px-3 py-1 text-sm font-inter tracking-tight font-semibold" href="#">Inventory</a>
+</nav>
+<div class="flex items-center gap-4 border-l border-white/10 pl-6">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-blue-400 transition-colors" data-icon="mic">mic</span>
+<div class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center border border-white/20">
+<span class="material-symbols-outlined text-xs" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 py-8">
+<!-- Toolbar & Filter Chips -->
+<div class="mb-8 space-y-4">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Precision Components</h2>
+<p class="text-on-primary-container font-label-sm text-label-sm mt-1">2,482 high-performance units available</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-outline-variant hover:border-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+<span class="font-label-sm text-label-sm">Filters</span>
+</button>
+<div class="flex items-center p-1 bg-surface-container-lowest border border-outline-variant rounded-lg">
+<button class="p-1.5 rounded-md bg-secondary-container text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+</button>
+<button class="p-1.5 rounded-md text-slate-500 hover:text-on-background transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="view_list">view_list</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-outline-variant">
+<span class="font-label-sm text-label-sm">Sort: Most Relevant</span>
+<span class="material-symbols-outlined text-sm" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-blue-400 font-label-sm text-[12px]">
+                    Price: $500 - $2500
+                    <span class="material-symbols-outlined text-[14px] cursor-pointer" data-icon="close">close</span>
+</span>
+<span class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-blue-400 font-label-sm text-[12px]">
+                    Brand: QuantumLogic
+                    <span class="material-symbols-outlined text-[14px] cursor-pointer" data-icon="close">close</span>
+</span>
+<span class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-blue-400 font-label-sm text-[12px]">
+                    Rating: 4.5+
+                    <span class="material-symbols-outlined text-[14px] cursor-pointer" data-icon="close">close</span>
+</span>
+<button class="text-on-primary-container hover:text-on-background text-[12px] font-semibold underline underline-offset-4 ml-2">Clear all</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Filter Sidebar -->
+<aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-28">
+<section class="space-y-4">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container">Price Range</h4>
+<div class="px-2">
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full relative">
+<div class="absolute left-1/4 right-1/4 h-full bg-secondary"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-secondary-fixed rounded-full shadow-lg border-2 border-primary-container cursor-pointer"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-secondary-fixed rounded-full shadow-lg border-2 border-primary-container cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-4">
+<div class="bg-surface-container-low border border-outline-variant px-3 py-1 rounded text-xs font-code">$500</div>
+<div class="bg-surface-container-low border border-outline-variant px-3 py-1 rounded text-xs font-code">$2500</div>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container">Manufacturers</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded bg-surface-container-highest border border-outline-variant group-hover:border-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="text-sm font-body-md text-on-surface">QuantumLogic</span>
+<span class="ml-auto text-xs text-on-primary-container">124</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded bg-surface-container-highest border border-outline-variant group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-body-md text-on-surface">Apex Precision</span>
+<span class="ml-auto text-xs text-on-primary-container">89</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded bg-surface-container-highest border border-outline-variant group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-body-md text-on-surface">Flux Core</span>
+<span class="ml-auto text-xs text-on-primary-container">42</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded bg-surface-container-highest border border-outline-variant group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-body-md text-on-surface">Zenith Systems</span>
+<span class="ml-auto text-xs text-on-primary-container">215</span>
+</label>
+</div>
+</section>
+<section class="space-y-4">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container">Technical Rating</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-2 cursor-pointer text-yellow-500">
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star_half" style="font-variation-settings: 'FILL' 1;">star_half</span>
+<span class="text-xs text-on-surface ml-1 font-medium">4.5 &amp; up</span>
+</div>
+<div class="flex items-center gap-2 cursor-pointer text-slate-500">
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 0;">star</span>
+<span class="text-xs text-on-surface ml-1 font-medium">4.0 &amp; up</span>
+</div>
+</div>
+</section>
+<div class="p-4 rounded-xl glass-surface border-blue-500/20 luminous-edge">
+<p class="text-sm font-body-md text-on-surface mb-3">Enterprise Pro Account</p>
+<p class="text-[12px] text-on-primary-container mb-4">Unlock 15% bulk discount on orders over $10,000.</p>
+<button class="w-full py-2 bg-secondary-container text-white font-label-sm rounded-lg hover:shadow-[0_0_20px_rgba(5,102,217,0.4)] transition-all">Upgrade Now</button>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="lg:col-span-9">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<article class="group relative bg-surface-container-low border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
+<div class="aspect-square relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern sleek workstation laptop with glowing blue keyboard on a dark minimalist office desk, premium technical lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVWTeZ03XoXpgUYvPpz9EVzT8WNVqOIhQ5TIzMaFsrg2qg1W1ct6Qg-hnnzCUSlsKNhbuI69PgxlOE9J6FzPTCyKPSQP6W_gSZGll7-4T6VMWhMH5aSbZE7CJXeU1mvqYTkyIZscSP0eP6dvheKH9-hcpnXf2y-rP462ZY3Mht0NBXTPiUjawWPFU5tBfcJCk0KxeXZHaWq2K7T0LZKNLUjs6k7Ux4wAqxV82d8kcrJRC_TPUWIyXSUyFuEAJRtpEYlWp5FrmBipE"/>
+<div class="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md p-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px] text-white" data-icon="favorite">favorite</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="px-2 py-1 bg-blue-600 text-[10px] font-bold uppercase tracking-wider text-white rounded">New Arrival</span>
+</div>
+</div>
+<div class="p-5 space-y-2">
+<div class="flex justify-between items-start">
+<span class="text-[10px] uppercase tracking-widest text-on-tertiary-container font-bold">QuantumLogic</span>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.9</span>
+</div>
+</div>
+<h3 class="text-body-lg font-h3 text-on-surface leading-tight group-hover:text-blue-400 transition-colors">NeuralEdge Workstation Pro X1</h3>
+<p class="text-2xl font-code text-on-surface font-bold">$3,299.00</p>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-primary-container border border-outline-variant">64GB RAM</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-primary-container border border-outline-variant">RTX 4090</span>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="group relative bg-surface-container-low border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300">
+<div class="aspect-square relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Industrial server rack component with glowing green and blue led status lights in a data center environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF4Fw5efhgkxlYyOT2u0eTw_f2ol4_JlfYQo4VZALWnrESKuBtq-v_eCdJed4IjRx1c9wbpjFul5fe1ReRFaMOqUPO7K_cA-RinIX7e3e27SCF7DHCDCALNVx33bqn7Z6iLtq26JZPYEaefBPqIGCND7Rk8MxnK_L37gEfs7NJbASu2YN53TY7E54Hw29r9c7IID_crLuNCBjGUbQ7ju4DmGi6M23Z8AEWeiHvd2px6d8JHod3cBN011ruJ4CR7LO8kOY-OM0bcp8"/>
+<div class="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md p-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px] text-white" data-icon="favorite">favorite</span>
+</div>
+</div>
+<div class="p-5 space-y-2">
+<div class="flex justify-between items-start">
+<span class="text-[10px] uppercase tracking-widest text-on-tertiary-container font-bold">Apex Precision</span>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.7</span>
+</div>
+</div>
+<h3 class="text-body-lg font-h3 text-on-surface leading-tight">Apex Rack-Mount Storage S3</h3>
+<p class="text-2xl font-code text-on-surface font-bold">$1,850.00</p>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-primary-container border border-outline-variant">128TB Raw</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-primary-container border border-outline-variant">Hot-Swap</span>
+</div>
+</div>
+</article>
+<!-- Product Card 3 (Featured/Bento Style Large) -->
+<article class="group relative bg-surface-container-low border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300">
+<div class="aspect-square relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Macro photo of a golden silicon microprocessor on a motherboard with intricate circuitry patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA6OZJT0123FN3Gf0uCF_fCg4IjiFdGVhb3yH1RziNhXlkRL3mydaDC0-tq4QbEU6is1nEr0csM2GTnguA5K4sbwzBB8ww11zjvkWJ4CRVEW8RlpwOdMl31EU1G4Wv5WN9pu4Yp8H-nw_4PKBA0mVV7ghhqQ5aAmaGKjjC3MbdScaaVwS2nuqeKuinJpaMhTUfBjjwcXk6_TAmx4BQwj-x4QgSA6lVqV2ApNNQv4GjkEcEIK9AymWNb9RBMCX6Dk96HlPhx7ArQHA"/>
+</div>
+<div class="p-5 space-y-2">
+<div class="flex justify-between items-start">
+<span class="text-[10px] uppercase tracking-widest text-on-tertiary-container font-bold">Flux Core</span>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">5.0</span>
+</div>
+</div>
+<h3 class="text-body-lg font-h3 text-on-surface leading-tight">Flux Z-Series AI Processor</h3>
+<p class="text-2xl font-code text-on-surface font-bold">$899.00</p>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-primary-container border border-outline-variant">4nm Process</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-primary-container border border-outline-variant">AI-Optimized</span>
+</div>
+</div>
+</article>
+<!-- Shimmer Loading Placeholder -->
+<div class="bg-surface-container-low border border-white/5 rounded-2xl overflow-hidden">
+<div class="aspect-square shimmer bg-surface-container-highest"></div>
+<div class="p-5 space-y-4">
+<div class="flex justify-between">
+<div class="h-3 w-20 shimmer rounded bg-surface-container-highest"></div>
+<div class="h-3 w-10 shimmer rounded bg-surface-container-highest"></div>
+</div>
+<div class="h-6 w-full shimmer rounded bg-surface-container-highest"></div>
+<div class="h-8 w-24 shimmer rounded bg-surface-container-highest"></div>
+</div>
+</div>
+<!-- Shimmer Loading Placeholder -->
+<div class="bg-surface-container-low border border-white/5 rounded-2xl overflow-hidden">
+<div class="aspect-square shimmer bg-surface-container-highest"></div>
+<div class="p-5 space-y-4">
+<div class="flex justify-between">
+<div class="h-3 w-20 shimmer rounded bg-surface-container-highest"></div>
+<div class="h-3 w-10 shimmer rounded bg-surface-container-highest"></div>
+</div>
+<div class="h-6 w-full shimmer rounded bg-surface-container-highest"></div>
+<div class="h-8 w-24 shimmer rounded bg-surface-container-highest"></div>
+</div>
+</div>
+<!-- Shimmer Loading Placeholder -->
+<div class="bg-surface-container-low border border-white/5 rounded-2xl overflow-hidden">
+<div class="aspect-square shimmer bg-surface-container-highest"></div>
+<div class="p-5 space-y-4">
+<div class="flex justify-between">
+<div class="h-3 w-20 shimmer rounded bg-surface-container-highest"></div>
+<div class="h-3 w-10 shimmer rounded bg-surface-container-highest"></div>
+</div>
+<div class="h-6 w-full shimmer rounded bg-surface-container-highest"></div>
+<div class="h-8 w-24 shimmer rounded bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden by default, shown for example context) -->
+<div class="hidden flex-col items-center justify-center py-32 text-center">
+<div class="w-64 h-64 bg-surface-container/30 rounded-full flex items-center justify-center border border-white/5 mb-8">
+<span class="material-symbols-outlined text-[80px] text-slate-700" data-icon="search_off">search_off</span>
+</div>
+<h3 class="text-h3 font-h3 text-on-surface">No hardware found</h3>
+<p class="text-on-primary-container mt-2 max-w-sm">We couldn't find any products matching your specific technical filters. Try broadening your parameters.</p>
+<button class="mt-8 px-6 py-3 bg-surface-container-highest border border-outline-variant rounded-xl font-label-sm text-label-sm hover:border-primary transition-all">Reset All Filters</button>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex justify-center">
+<button class="flex items-center gap-3 px-8 py-4 bg-surface-container-high border border-outline-variant rounded-2xl font-semibold hover:border-blue-400 transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-blue-400 group-hover:rotate-180 transition-transform duration-500" data-icon="sync">sync</span>
+                        Initialize Next Batch
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl rounded-t-2xl border-t border-slate-800/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-blue-400 font-bold bg-blue-500/10 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Wishlist</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button - Only on appropriate views -->
+<button class="fixed bottom-24 right-6 md:bottom-8 md:right-8 w-14 h-14 rounded-2xl bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-xl shadow-blue-500/20 border border-white/10 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="support_agent" style="font-variation-settings: 'wght' 600;">support_agent</span>
+</button>
+</body></html>

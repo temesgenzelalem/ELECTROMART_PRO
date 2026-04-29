@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return request.auth.uid == userId; }
+    function isAdmin() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'; }
+
+    // User profiles: Only owners can read/write their own data
+    match /users/{userId} {
+      allow read, write: if isSignedIn() && isOwner(userId);
+    }
+
+    // Products: Publicly readable, only admins can write
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isAdmin();
+    }
+
+    // Carts & Wishlists: Only owners can access
+    match /carts/{userId} {
+      allow read, write: if isSignedIn() && isOwner(userId);
+    }
+    match /wishlists/{userId} {
+      allow read, write: if isSignedIn() && isOwner(userId);
+    }
+
+    // Orders: Only owners can read, creation triggered by authenticated users
+    match /orders/{orderId} {
+      allow read: if isSignedIn() && isOwner(resource.data.userId);
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && isAdmin();
+    }
+
+    // Reviews: Publicly readable, only owners of the review can update/delete
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn() && isOwner(resource.data.userId);
+    }
+
+    // Coupons: Publicly readable (validation handled in Cloud Functions)
+    match /coupons/{couponId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isAdmin();
+    }
+  }
+}

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#d3e4fe",
+            "surface-container-highest": "#26364a",
+            "inverse-on-surface": "#213145",
+            "primary-fixed": "#dae2fd",
+            "on-tertiary-container": "#008da5",
+            "tertiary-container": "#001b21",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "tertiary": "#4cd7f6",
+            "on-surface-variant": "#c6c6cd",
+            "on-tertiary-fixed": "#001f26",
+            "inverse-surface": "#d3e4fe",
+            "on-primary-fixed-variant": "#3f465c",
+            "surface-container": "#102034",
+            "background": "#031427",
+            "on-primary-fixed": "#131b2e",
+            "on-tertiary": "#003640",
+            "on-error-container": "#ffdad6",
+            "outline-variant": "#45464d",
+            "surface-container-high": "#1b2b3f",
+            "secondary": "#adc6ff",
+            "primary-container": "#0f172a",
+            "on-primary-container": "#798098",
+            "on-secondary-container": "#e6ecff",
+            "secondary-container": "#0566d9",
+            "inverse-primary": "#565e74",
+            "on-secondary-fixed-variant": "#004395",
+            "on-error": "#690005",
+            "error": "#ffb4ab",
+            "primary-fixed-dim": "#bec6e0",
+            "surface": "#031427",
+            "surface-dim": "#031427",
+            "outline": "#909097",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "on-primary": "#283044",
+            "surface-tint": "#bec6e0",
+            "on-secondary-fixed": "#001a42",
+            "on-secondary": "#002e6a",
+            "secondary-fixed": "#d8e2ff",
+            "surface-variant": "#26364a",
+            "surface-bright": "#2a3a4f",
+            "surface-container-low": "#0b1c30",
+            "error-container": "#93000a",
+            "primary": "#bec6e0",
+            "surface-container-lowest": "#000f21",
+            "tertiary-fixed": "#acedff",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-surface": "#d3e4fe"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "md": "1.5rem",
+            "xl": "4rem",
+            "xs": "0.5rem",
+            "unit": "4px",
+            "gutter": "1.5rem",
+            "container-max": "1440px",
+            "sm": "1rem",
+            "lg": "2.5rem"
+          },
+          "fontFamily": {
+            "code": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "h3": ["Inter"],
+            "h1": ["Inter"],
+            "body-lg": ["Inter"],
+            "h2": ["Inter"],
+            "label-sm": ["Inter"]
+          },
+          "fontSize": {
+            "code": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}],
+            "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "h2": ["30px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-sm": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .luminous-edge {
+      box-shadow: inset 0 1px 0 0 rgba(59, 130, 246, 0.2);
+    }
+    .zebra-row:nth-child(even) {
+      background: rgba(30, 41, 59, 0.3);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.3)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500" data-icon="bolt">bolt</span>
+<h1 class="text-xl font-black tracking-tighter text-slate-50 uppercase font-inter">ElectroMart Pro</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-800/50 transition-colors active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-slate-400" data-icon="mic">mic</span>
+</button>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-md space-y-lg">
+<!-- Search Section -->
+<section class="w-full max-w-3xl mx-auto space-y-md">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full bg-surface-container border border-outline/20 rounded-xl py-4 pl-12 pr-24 focus:outline-none focus:border-secondary-container focus:ring-2 focus:ring-secondary-container/20 transition-all font-body-md placeholder:text-outline-variant" placeholder="Search enterprise hardware, components, and tools..." type="text"/>
+<div class="absolute inset-y-0 right-4 flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-outline transition-colors">
+<span class="material-symbols-outlined" data-icon="barcode_scanner">barcode_scanner</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-outline transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</div>
+<!-- Trending Categories (Chips) -->
+<div class="flex flex-wrap gap-2">
+<span class="text-label-sm font-label-sm text-on-primary-container px-2">Trending:</span>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline/10 text-label-sm font-label-sm hover:text-tertiary hover:border-tertiary transition-all cursor-pointer">Server Racks</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline/10 text-label-sm font-label-sm hover:text-tertiary hover:border-tertiary transition-all cursor-pointer">RTX 4090 Ti</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline/10 text-label-sm font-label-sm hover:text-tertiary hover:border-tertiary transition-all cursor-pointer">Fiber Optic</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline/10 text-label-sm font-label-sm hover:text-tertiary hover:border-tertiary transition-all cursor-pointer">SFP+ Modules</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline/10 text-label-sm font-label-sm hover:text-tertiary hover:border-tertiary transition-all cursor-pointer">LTO-9 Tapes</button>
+</div>
+</section>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Recent Searches & History -->
+<aside class="md:col-span-4 space-y-md">
+<div class="bg-surface-container-low rounded-xl p-md border border-outline/5 luminous-edge">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-h3 text-body-md font-semibold text-on-background">Recent Searches</h3>
+<button class="text-label-sm text-secondary hover:underline">Clear all</button>
+</div>
+<ul class="space-y-1">
+<li class="group flex items-center justify-between p-2 rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="history">history</span>
+<span class="text-body-md text-on-surface-variant">Dell PowerEdge R750</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 text-sm" data-icon="close">close</span>
+</li>
+<li class="group flex items-center justify-between p-2 rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="history">history</span>
+<span class="text-body-md text-on-surface-variant">Cisco Catalyst 9300</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 text-sm" data-icon="close">close</span>
+</li>
+<li class="group flex items-center justify-between p-2 rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="history">history</span>
+<span class="text-body-md text-on-surface-variant">Industrial UPS 10kVA</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 text-sm" data-icon="close">close</span>
+</li>
+</ul>
+</div>
+<div class="bg-gradient-to-br from-secondary-container/20 to-transparent rounded-xl p-md border border-secondary-container/20">
+<h4 class="text-on-secondary-container font-semibold mb-2">Pro Tip</h4>
+<p class="text-label-sm text-on-surface-variant leading-relaxed">Use the barcode scanner to quickly find replacement parts for your existing inventory.</p>
+</div>
+</aside>
+<!-- Real-time Suggestions / Results -->
+<section class="md:col-span-8 space-y-md">
+<h3 class="font-h3 text-body-md font-semibold text-on-background px-2">Recommended for You</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Suggestion Item 1 -->
+<div class="bg-surface-container border border-outline/10 rounded-xl p-4 flex gap-4 hover:border-secondary-container/50 transition-all cursor-pointer group">
+<div class="w-24 h-24 rounded-lg bg-surface-container-highest flex-shrink-0 overflow-hidden">
+<img alt="Hardware component" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="high-tech professional server cpu processor on a dark tech background with blue neon accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9eTFljVzmP2rA2--fQmC_8ymIHbn9BEpG7TcV68yWZNHhk3e87_oufBxT3b0ZvARS5YdBTm_OHjFwQQjng3-uYL6H8hyCb-QvEvHiCXTH0B7n2J5V39NSsHSERTdU_WN--bGNFgT9SKkuLn4TpK7w6zIDShuO9tVWQbt0_7Gr2Q0YcOsJ0fYI1u_fT9YiYJYB382mHB-gIJg0ClLf46TrJQy2Vw0L_j0HxqAhBr46j0O7dHgW-ybZpzQEbCELFMGPe9G8IPeLADI"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-body-lg font-bold text-on-background">Intel Xeon Platinum 8480+</h4>
+<span class="text-secondary font-code text-label-sm">$4,299.00</span>
+</div>
+<p class="text-label-sm text-on-surface-variant line-clamp-1">56-Core, 112-Thread, 2.0GHz to 3.8GHz Turbo, 105MB Cache</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] uppercase tracking-widest bg-tertiary-container text-tertiary px-2 py-0.5 rounded font-bold">In Stock</span>
+<span class="text-[10px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="local_shipping">local_shipping</span> 
+                  Same day shipping
+                </span>
+</div>
+</div>
+</div>
+<!-- Suggestion Item 2 -->
+<div class="bg-surface-container border border-outline/10 rounded-xl p-4 flex gap-4 hover:border-secondary-container/50 transition-all cursor-pointer group">
+<div class="w-24 h-24 rounded-lg bg-surface-container-highest flex-shrink-0 overflow-hidden">
+<img alt="Networking Gear" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close-up of a high-end enterprise network switch with many glowing ethernet ports and blue led lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnzbhl0h4Z-Gg4K8v5gRhE_HVnRYNEprMR0In6rgZBQ61zx1Pv745vHnVVqZpuDHtSoAh3_NPWDVlos7NTDixKv2lOMw5VasIgGO5Of_5y2JgJnkWxzuX42-Ioh1eiXp8kIDtENsKef2aL0OneZF0PIsQoEIbp9Sz0ZvNV-xLcBfdXmKucB9uGbTDlMvXkDqFeUpxmKfyqZb2AA1TQdtpqX4xGz8HJY3psep9bRnOaaktSxRcr5YRFsgEH_OlDKmJSFLjBNQL89zE"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-body-lg font-bold text-on-background">Ubiquiti UniFi Dream Machine SE</h4>
+<span class="text-secondary font-code text-label-sm">$499.00</span>
+</div>
+<p class="text-label-sm text-on-surface-variant line-clamp-1">Enterprise-grade UniFi OS Console with 10 Gbps SFP+ Support</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] uppercase tracking-widest bg-error-container text-error px-2 py-0.5 rounded font-bold">Low Stock</span>
+<span class="text-[10px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 
+                  4.9 (128 reviews)
+                </span>
+</div>
+</div>
+</div>
+<!-- Suggestion Item 3 -->
+<div class="bg-surface-container border border-outline/10 rounded-xl p-4 flex gap-4 hover:border-secondary-container/50 transition-all cursor-pointer group">
+<div class="w-24 h-24 rounded-lg bg-surface-container-highest flex-shrink-0 overflow-hidden">
+<img alt="Workstation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="minimalist professional workstation setup with a powerful sleek tower pc on a dark desk with blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbFPocYUQ4WpQyXaK02mZP-Ttukn9kemg2rROVA6mKaF7X1MsDYseAIUg_x9e_jFQ9OkwN7rB9u5ErKpv1mmP2GyiUpwSPXlhVn5IgNAkcPWAGYWkkFLQb5MJz7R3l0x93Q2mIxWIf2Vqs4fBhsQV25hWk-7BWeKvCY2gN9dljbutuhxF-gNgUcfbOTbi4Jy0_4ZjN6txXQctKrRGIDFWUgHTFztiuH4tAhw44J5BNDwxf1_piBMEBpF4hEen1fzgysQSxVFNpGE"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-body-lg font-bold text-on-background">HP Z8 Fury G5 Workstation</h4>
+<span class="text-secondary font-code text-label-sm">$8,120.00</span>
+</div>
+<p class="text-label-sm text-on-surface-variant line-clamp-1">Intel Xeon W-3400 Series, dual-GPU support, up to 2TB RAM</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] uppercase tracking-widest bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded font-bold">Pre-Order</span>
+<span class="text-[10px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="bolt">bolt</span> 
+                  High Performance
+                </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Empty State (Hidden by default, shown when searching nonsense) -->
+<section class="hidden py-xl flex flex-col items-center text-center space-y-md">
+<div class="w-64 h-64 relative">
+<div class="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full"></div>
+<span class="material-symbols-outlined text-[120px] text-outline-variant relative" data-icon="search_off">search_off</span>
+</div>
+<div class="space-y-xs max-w-md">
+<h2 class="font-h2 text-on-background">No matches found</h2>
+<p class="text-body-md text-on-surface-variant">We couldn't find any enterprise hardware matching your query. Check the spelling or try a broader category.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-lg py-3 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(5,102,217,0.4)] transition-all active:scale-95">
+        Browse All Categories
+      </button>
+</section>
+</main>
+<!-- BottomNavBar (Visible on Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl rounded-t-2xl border-t border-slate-800/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<button class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-blue-400 font-bold bg-blue-500/10 rounded-xl px-3 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Wishlist</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Profile</span>
+</button>
+</nav>
+<!-- Desktop Fab (Only on dashboard types, hidden here as per context rules but placeholder for visual balance) -->
+<footer class="mt-xl py-lg border-t border-outline/5 bg-surface-container-lowest hidden md:block">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-4 gap-lg">
+<div class="col-span-2">
+<h2 class="text-xl font-black tracking-tighter text-slate-50 uppercase font-inter mb-4">ElectroMart Pro</h2>
+<p class="text-label-sm text-on-surface-variant max-w-xs">The global standard for professional electronics and enterprise computing infrastructure.</p>
+</div>
+<div>
+<h5 class="font-bold text-on-background mb-4">Support</h5>
+<ul class="space-y-2 text-label-sm text-on-surface-variant">
+<li class="hover:text-secondary cursor-pointer">Technical Docs</li>
+<li class="hover:text-secondary cursor-pointer">RMA Request</li>
+<li class="hover:text-secondary cursor-pointer">Wholesale Inquiries</li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-on-background mb-4">Legal</h5>
+<ul class="space-y-2 text-label-sm text-on-surface-variant">
+<li class="hover:text-secondary cursor-pointer">Compliance</li>
+<li class="hover:text-secondary cursor-pointer">Terms of Service</li>
+<li class="hover:text-secondary cursor-pointer">Privacy Protocol</li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

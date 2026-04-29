@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#d3e4fe",
+                    "surface-container-highest": "#26364a",
+                    "inverse-on-surface": "#213145",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#008da5",
+                    "tertiary-container": "#001b21",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "tertiary": "#4cd7f6",
+                    "on-surface-variant": "#c6c6cd",
+                    "on-tertiary-fixed": "#001f26",
+                    "inverse-surface": "#d3e4fe",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-container": "#102034",
+                    "background": "#031427",
+                    "on-primary-fixed": "#131b2e",
+                    "on-tertiary": "#003640",
+                    "on-error-container": "#ffdad6",
+                    "outline-variant": "#45464d",
+                    "surface-container-high": "#1b2b3f",
+                    "secondary": "#adc6ff",
+                    "primary-container": "#0f172a",
+                    "on-primary-container": "#798098",
+                    "on-secondary-container": "#e6ecff",
+                    "secondary-container": "#0566d9",
+                    "inverse-primary": "#565e74",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface": "#031427",
+                    "surface-dim": "#031427",
+                    "outline": "#909097",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "on-primary": "#283044",
+                    "surface-tint": "#bec6e0",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#002e6a",
+                    "secondary-fixed": "#d8e2ff",
+                    "surface-variant": "#26364a",
+                    "surface-bright": "#2a3a4f",
+                    "surface-container-low": "#0b1c30",
+                    "error-container": "#93000a",
+                    "primary": "#bec6e0",
+                    "surface-container-lowest": "#000f21",
+                    "tertiary-fixed": "#acedff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-surface": "#d3e4fe"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1.5rem",
+                    "xl": "4rem",
+                    "xs": "0.5rem",
+                    "unit": "4px",
+                    "gutter": "1.5rem",
+                    "container-max": "1440px",
+                    "sm": "1rem",
+                    "lg": "2.5rem"
+            },
+            "fontFamily": {
+                    "code": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h2": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "code": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h2": ["30px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .luminous-edge {
+            box-shadow: inset 0 1px 0 0 rgba(59, 130, 246, 0.2);
+        }
+        .zebra-row:nth-child(even) {
+            background: rgba(30, 41, 59, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-tertiary-container selection:text-tertiary">
+<!-- Top Navigation Anchor -->
+<header class="sticky top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.3)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500" data-icon="bolt">bolt</span>
+<h1 class="text-xl font-black tracking-tighter text-slate-50 uppercase font-inter">ElectroMart Pro</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="font-inter tracking-tight font-semibold text-slate-400 hover:bg-slate-800/50 transition-colors px-3 py-1 rounded-lg" href="#">Home</a>
+<a class="font-inter tracking-tight font-semibold text-slate-400 hover:bg-slate-800/50 transition-colors px-3 py-1 rounded-lg" href="#">Explore</a>
+<a class="font-inter tracking-tight font-semibold text-blue-400 hover:bg-slate-800/50 transition-colors px-3 py-1 rounded-lg" href="#">Checkout</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer" data-icon="mic">mic</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-white/10 overflow-hidden">
+<img alt="User" data-alt="Portrait of a professional tech executive in a high-key studio setting with blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2bOzsnianexcLf9XtTs1NjEZ1aKIH9DarNWl2KvYMjCVXHppIBI1FX91kS5nXtXt4P_Z2Wwo29WACOhGiyu3jmbnIftqF7sVWtTqgdedm1glF4Vdm6Lg3-lnbAVWzAH6_DBRS0xl_LLAPQwmnmbf_6RPelvlq4e0JoiUpRrBfxoOnw_8TGyFxP0bhu6TzNph0cCZYzolPDOA3ZffUXVZJcXD7LV9-P1xNgFdAKVv4AX7DjUqAh3heiWo-i_LcQE-x1aE-3rFJvSo"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-gutter py-lg pb-32">
+<!-- Progress Stepper -->
+<div class="flex items-center justify-center mb-xl">
+<div class="flex items-center w-full max-w-3xl">
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold luminous-edge mb-2">1</div>
+<span class="font-label-sm text-label-sm text-secondary">Address</span>
+</div>
+<div class="h-[2px] flex-1 bg-secondary-container/30 mx-2"></div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant text-outline flex items-center justify-center font-bold mb-2">2</div>
+<span class="font-label-sm text-label-sm text-outline">Payment</span>
+</div>
+<div class="h-[2px] flex-1 bg-outline-variant/20 mx-2"></div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant text-outline flex items-center justify-center font-bold mb-2">3</div>
+<span class="font-label-sm text-label-sm text-outline">Review</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Checkout Actions -->
+<div class="col-span-12 lg:col-span-8 space-y-md">
+<!-- Section 1: Address Selection -->
+<section class="glass-panel rounded-xl p-md">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="location_on">location_on</span>
+<h2 class="font-h2 text-h2 text-on-surface">Shipping Address</h2>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-white/5 text-blue-400 font-semibold hover:bg-slate-800 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            Add New Address
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<!-- Saved Address Card 1 -->
+<div class="relative p-md rounded-xl bg-surface-container border-2 border-secondary-container luminous-edge group cursor-pointer">
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-secondary-container" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="inline-block px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-bold tracking-widest uppercase mb-2">Default</span>
+<h3 class="font-h3 text-body-lg text-on-surface font-bold mb-1">Corporate Headquarters</h3>
+<p class="text-on-primary-container text-sm leading-relaxed">
+                                4512 Silicon Tech Park, Building 4<br/>
+                                Floor 12, Office 1204<br/>
+                                San Francisco, CA 94103<br/>
+<span class="block mt-2 font-code text-xs text-on-surface-variant">+1 (555) 012-3456</span>
+</p>
+</div>
+<!-- Saved Address Card 2 -->
+<div class="p-md rounded-xl bg-surface-container-low border border-white/5 hover:border-outline-variant transition-all cursor-pointer group">
+<h3 class="font-h3 text-body-lg text-on-surface font-bold mb-1">R&amp;D Lab</h3>
+<p class="text-on-primary-container text-sm leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
+                                900 Innovation Way<br/>
+                                Industrial Area Phase II<br/>
+                                Palo Alto, CA 94301<br/>
+<span class="block mt-2 font-code text-xs text-on-surface-variant">+1 (555) 987-6543</span>
+</p>
+</div>
+</div>
+</section>
+<!-- Section 2: Order Preview (Enterprise Table Style) -->
+<section class="glass-panel rounded-xl overflow-hidden">
+<div class="p-md border-b border-white/5 bg-white/5">
+<h2 class="font-h3 text-h3 text-on-surface flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="inventory_2">inventory_2</span>
+                            Shipment Overview
+                        </h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/50 text-on-primary-container font-label-sm text-xs uppercase tracking-widest">
+<th class="px-md py-4">Hardware Component</th>
+<th class="px-md py-4">SKU/Technical Spec</th>
+<th class="px-md py-4">Qty</th>
+<th class="px-md py-4 text-right">Unit Price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="zebra-row">
+<td class="px-md py-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-low border border-white/10 flex items-center justify-center p-2">
+<img alt="Workstation" data-alt="Close-up of a high-end enterprise workstation laptop with brushed metal finish and glowing blue accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAze2s0pbhv3VlqZRl2O-BG-4lLXIGqnKe3OYS04AThrjH8kWmLJ6smnHTPE4jWAeIbQ7zH024mB4Q5E3bdLhNLFMy0yl_WqapWBfbpG0d2xPhOxrIW9vhwFNxaxJpyet_RUPIo8Q8LY2ZR23KtExEjRNcg1GGrgPwLSKzOi6n2cj1W4hGgJe4s48rTPxMWMz_IAE21FaLXajEjOVAAzMW4YCvdsp229NeYvpIvZA0ZFNtcl7R5KWnNz6lauTxBQCWdXjBTTFBXOx4"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Precision Pro 9500</div>
+<div class="text-xs text-on-primary-container">Next-Day Shipping</div>
+</div>
+</div>
+</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-on-surface-variant font-code">64GB RAM</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-on-surface-variant font-code">2TB NVMe</span>
+</div>
+</td>
+<td class="px-md py-4 font-code text-on-surface">02</td>
+<td class="px-md py-4 text-right font-bold text-on-surface">$2,499.00</td>
+</tr>
+<tr class="zebra-row">
+<td class="px-md py-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-low border border-white/10 flex items-center justify-center p-2">
+<img alt="Monitor" data-alt="A professional ultra-wide 5K monitor on a sleek ergonomic stand with high color accuracy lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjZ1av0nWDpiTcgrT_gn5KtX1X5B_KWkVI-2UGs1bnT5PqRJ2nBa4XjrpraihY0gQDrgp1TWFlTDX5Rmfpcddm0qoUk-GLpO0_XETq-kzWhRfNptZ0hlcdL7jk6qM0CSj3ITZnWMv1UB68pPltKzboPrV4-DpTdZdIyC7WG5Pb-6-ustxH8Ms4tkL1x9lIcA73sLdmz6KXllmszll2Cc1oTF---6MrdjMDpaKOiV9SxuNTaWv_ghoge4aPx03aaEYKeUeNCSyInGQ"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">UltraSharp 32" 4K</div>
+<div class="text-xs text-on-primary-container">Standard Freight</div>
+</div>
+</div>
+</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-on-surface-variant font-code">U3223QE</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-on-surface-variant font-code">IPS Black</span>
+</div>
+</td>
+<td class="px-md py-4 font-code text-on-surface">01</td>
+<td class="px-md py-4 text-right font-bold text-on-surface">$849.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="col-span-12 lg:col-span-4 sticky top-28">
+<div class="glass-panel rounded-xl p-md luminous-edge overflow-hidden relative">
+<!-- Subtle Tech Background Ornament -->
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+<h2 class="font-h3 text-h3 text-on-surface mb-md">Order Summary</h2>
+<div class="space-y-4 mb-lg">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-primary-container">Subtotal (3 items)</span>
+<span class="text-on-surface font-code">$5,847.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-primary-container">Shipping &amp; Logistics</span>
+<span class="text-tertiary font-code">FREE</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-primary-container">Estimated Tax (VAT 18%)</span>
+<span class="text-on-surface font-code">$1,052.46</span>
+</div>
+<div class="pt-4 border-t border-white/10 flex justify-between items-end">
+<div>
+<span class="text-xs font-label-sm uppercase tracking-widest text-on-primary-container">Grand Total</span>
+<div class="text-3xl font-h1 text-on-surface font-black">$6,899.46</div>
+</div>
+<span class="text-[10px] bg-secondary-container/20 text-secondary px-2 py-1 rounded font-bold mb-1">USD</span>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full py-4 rounded-xl bg-gradient-to-v from-blue-500 to-blue-700 text-white font-bold tracking-tight shadow-[0_4px_20px_rgba(59,130,246,0.4)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.6)] transition-all active:scale-95 flex items-center justify-center gap-2">
+                            Secure Checkout
+                            <span class="material-symbols-outlined text-xl" data-icon="shield_with_heart">shield_with_heart</span>
+</button>
+<p class="text-center text-[10px] text-on-primary-container px-4">
+                            By clicking 'Secure Checkout', you agree to ElectroMart Pro's Enterprise Terms of Service and Hardware Procurement Policy.
+                        </p>
+</div>
+<!-- Trust Signals -->
+<div class="mt-lg pt-lg border-t border-white/5 grid grid-cols-2 gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container text-sm" data-icon="lock">lock</span>
+<span class="text-[10px] text-on-primary-container font-semibold uppercase tracking-tighter">SSL Secured</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container text-sm" data-icon="verified">verified</span>
+<span class="text-[10px] text-on-primary-container font-semibold uppercase tracking-tighter">Certified Pro</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal State (Hidden by default, shown here for representation) -->
+<!-- This would usually be triggered via state. I am rendering it as a fixed overlay overlaying the background content for this task's "Success State" requirement -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-md hidden">
+<div class="glass-panel max-w-xl w-full rounded-2xl p-lg text-center relative overflow-hidden">
+<!-- Order Success Graphic -->
+<div class="w-32 h-32 mx-auto mb-md relative">
+<div class="absolute inset-0 bg-blue-500/20 rounded-full animate-ping opacity-25"></div>
+<div class="relative z-10 w-full h-full rounded-full bg-secondary-container flex items-center justify-center shadow-[0_0_40px_rgba(59,130,246,0.4)]">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container" data-icon="task_alt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+</div>
+<h2 class="text-h2 font-h2 text-on-surface mb-2">Order Confirmed</h2>
+<p class="text-on-primary-container mb-lg">Your enterprise hardware is being prepared for deployment. Transaction ID: <span class="text-tertiary font-code">#EMP-29401-X</span></p>
+<div class="bg-surface-container rounded-xl p-md mb-lg border border-white/5 text-left flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<div class="text-xs text-on-primary-container uppercase font-bold tracking-widest">Est. Delivery</div>
+<div class="text-on-surface font-bold">Tuesday, Oct 24 - 09:00 AM</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="py-3 rounded-lg border border-white/10 text-on-surface font-semibold hover:bg-white/5 transition-all">Download Invoice</button>
+<button class="py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold hover:shadow-[0_0_20px_rgba(5,102,217,0.4)] transition-all">Track Order</button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Shell (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl rounded-t-2xl border-t border-slate-800/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-blue-400 font-bold bg-blue-500/10 rounded-xl px-3 py-1 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Wishlist</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 opacity-80 hover:text-blue-300 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>
