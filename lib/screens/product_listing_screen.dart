@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
+import '../providers.dart';
 
-class ProductListingScreen extends StatelessWidget {
+class ProductListingScreen extends ConsumerWidget {
   const ProductListingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
@@ -29,9 +32,9 @@ class ProductListingScreen extends StatelessWidget {
             icon: const Icon(Icons.mic, color: Colors.grey),
             onPressed: () {},
           ),
-          CircleAvatar(
-            backgroundColor: const Color(0xFF0566D9),
-            child: const Icon(Icons.person, color: Colors.white, size: 16),
+          const CircleAvatar(
+            backgroundColor: Color(0xFF0566D9),
+            child: Icon(Icons.person, color: Colors.white, size: 16),
           ),
         ],
       ),
@@ -77,8 +80,7 @@ class ProductListingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.3),
                         border: Border.all(color: Colors.grey.withOpacity(0.5)),
@@ -93,8 +95,7 @@ class ProductListingScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.3),
                         border: Border.all(color: Colors.grey.withOpacity(0.5)),
@@ -257,6 +258,13 @@ class ProductListingScreen extends StatelessWidget {
                           const SizedBox(width: 8),
                           ElevatedButton(
                             onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF1B2B3F),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
                             child: Row(
                               children: [
                                 Text(
@@ -265,13 +273,6 @@ class ProductListingScreen extends StatelessWidget {
                                 ),
                                 const Icon(Icons.keyboard_arrow_down, size: 16),
                               ],
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF1B2B3F),
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
                             ),
                           ),
                         ],
@@ -303,8 +304,7 @@ class ProductListingScreen extends StatelessWidget {
                   // Product Grid
                   Expanded(
                     child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
@@ -334,24 +334,46 @@ class ProductListingScreen extends StatelessWidget {
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: 1, // Explore selected
-        items: const [
-          BottomNavigationBarItem(
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              context.go('/');
+              break;
+            case 1:
+              // Already on products
+              break;
+            case 2:
+              // Wishlist - not implemented yet
+              break;
+            case 3:
+              context.go('/cart');
+              break;
+            case 4:
+              context.go('/profile');
+              break;
+          }
+        },
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.explore),
             label: 'Explore',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Wishlist',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Badge(
+              label: Text(ref.watch(cartProvider).length.toString()),
+              child: const Icon(Icons.shopping_cart),
+            ),
             label: 'Cart',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
@@ -409,17 +431,15 @@ class ProductListingScreen extends StatelessWidget {
               if (index < rating.floor()) {
                 return const Icon(Icons.star, color: Colors.yellow, size: 16);
               } else if (index == rating.floor() && rating % 1 != 0) {
-                return const Icon(Icons.star_half,
-                    color: Colors.yellow, size: 16);
+                return const Icon(Icons.star_half, color: Colors.yellow, size: 16);
               } else {
-                return Icon(Icons.star_border,
-                    color: selected ? Colors.yellow : Colors.grey, size: 16);
+                return Icon(Icons.star_border, color: selected ? Colors.yellow : Colors.grey, size: 16);
               }
             }),
           ),
           const SizedBox(width: 8),
           Text(
-            '${rating} & up',
+            '$rating & up',
             style: GoogleFonts.inter(
               fontSize: 12,
               color: Colors.white,
@@ -455,15 +475,20 @@ class ProductListingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProductCard(String name, String brand, double price,
-      String imageUrl, List<String> specs, double rating) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF0B1C30),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
+  Widget _buildProductCard(String name, String brand, double price, String imageUrl, List<String> specs, double rating) {
+    return GestureDetector(
+      onTap: () {
+        // Navigate to product details
+        // For now, just go to the product details page
+        // In a real app, you'd pass the product ID
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFF0B1C30),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
@@ -471,8 +496,7 @@ class ProductListingScreen extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(16)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                     image: DecorationImage(
                       image: NetworkImage(imageUrl),
                       fit: BoxFit.cover,
@@ -488,16 +512,14 @@ class ProductListingScreen extends StatelessWidget {
                       color: Colors.black.withOpacity(0.8),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Icon(Icons.favorite_border,
-                        color: Colors.white, size: 16),
+                    child: const Icon(Icons.favorite_border, color: Colors.white, size: 16),
                   ),
                 ),
                 Positioned(
                   bottom: 8,
                   left: 8,
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(4),
@@ -572,31 +594,28 @@ class ProductListingScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 4,
-                  children: specs
-                      .map((spec) => Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF26364A),
-                              border: Border.all(
-                                  color: Colors.grey.withOpacity(0.3)),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Text(
-                              spec,
-                              style: GoogleFonts.inter(
-                                fontSize: 10,
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                          ))
-                      .toList(),
+                  children: specs.map((spec) => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF26364A),
+                      border: Border.all(color: Colors.grey.withOpacity(0.3)),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      spec,
+                      style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  )).toList(),
                 ),
               ],
             ),
           ),
         ],
       ),
-    );
+    ),
+  );
   }
 }
