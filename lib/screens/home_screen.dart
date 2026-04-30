@@ -12,7 +12,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
-        backgroundColor: Colors.black.withOpacity(0.6),
+        backgroundColor: Colors.black.withValues(opacity:0.6),
         elevation: 0,
         title: Row(
           children: [
@@ -57,7 +57,7 @@ class HomeScreen extends ConsumerWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                    colors: [Colors.black.withValues(opacity:0.6), Colors.transparent],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
@@ -158,7 +158,7 @@ class HomeScreen extends ConsumerWidget {
             ),
             // Flash Sale
             Container(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(opacity:0.1),
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,7 +298,7 @@ class HomeScreen extends ConsumerWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(opacity:0.6),
                     ),
                     padding: const EdgeInsets.all(24),
                     child: Column(
@@ -375,7 +375,7 @@ class HomeScreen extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.8),
+        backgroundColor: Colors.black.withValues(opacity:0.8),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: 0, // Home selected
@@ -434,9 +434,9 @@ class HomeScreen extends ConsumerWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withValues(opacity:0.5),
             borderRadius: BorderRadius.circular(40),
-            border: Border.all(color: Colors.white.withOpacity(0.1)),
+            border: Border.all(color: Colors.white.withValues(opacity:0.1)),
           ),
           child: Icon(icon, color: const Color(0xFF4CD7F6), size: 36),
         ),
@@ -459,9 +459,9 @@ class HomeScreen extends ConsumerWidget {
       width: 280,
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(opacity:0.6),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(opacity:0.1)),
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
