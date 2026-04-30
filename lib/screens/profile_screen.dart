@@ -12,7 +12,7 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
-        backgroundColor: Colors.black.withOpacity(0.6),
+        backgroundColor: Colors.black.withValues(alpha:0.6),
         title: Row(
           children: [
             Icon(Icons.bolt, color: Colors.blue[400]),
@@ -42,9 +42,9 @@ class ProfileScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha:0.6),
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Colors.blue.withOpacity(0.2)),
+                border: Border.all(color: Colors.blue.withValues(alpha:0.2)),
               ),
               child: Column(
                 children: [
@@ -127,9 +127,9 @@ class ProfileScreen extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha:0.3),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.white.withOpacity(0.1)),
+                      border: Border.all(color: Colors.white.withValues(alpha:0.1)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -138,13 +138,13 @@ class ProfileScreen extends ConsumerWidget {
                         Container(
                           height: 40,
                           width: 1,
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha:0.1),
                         ),
                         _buildStat('182', 'Orders'),
                         Container(
                           height: 40,
                           width: 1,
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha:0.1),
                         ),
                         _buildStat('4.2k', 'Points'),
                       ],
@@ -174,7 +174,7 @@ class ProfileScreen extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.8),
+        backgroundColor: Colors.black.withValues(alpha:0.8),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: 4, // Profile selected
@@ -255,9 +255,9 @@ class ProfileScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(alpha:0.6),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(alpha:0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,7 +267,7 @@ class ProfileScreen extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.1),
+                  color: Colors.blue.withValues(alpha:0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(icon, color: Colors.blue[400], size: 20),

@@ -14,7 +14,7 @@ class CartScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
-        backgroundColor: Colors.black.withOpacity(0.6),
+        backgroundColor: Colors.black.withValues(alpha:0.6),
         title: Row(
           children: [
             Icon(Icons.bolt, color: Colors.blue[400]),
@@ -80,9 +80,9 @@ class CartScreen extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha:0.3),
                       border: Border.all(
-                          color: const Color(0xFF4CD7F6).withOpacity(0.2)),
+                          color: const Color(0xFF4CD7F6).withValues(alpha:0.2)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -134,9 +134,9 @@ class CartScreen extends ConsumerWidget {
               child: Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha:0.6),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: Colors.white.withValues(alpha:0.1)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,7 +232,7 @@ class CartScreen extends ConsumerWidget {
                                     fontSize: 14,
                                   ),
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.3),
+                                  fillColor: Colors.black.withValues(alpha:0.3),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide:
@@ -241,7 +241,7 @@ class CartScreen extends ConsumerWidget {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: BorderSide(
-                                        color: Colors.grey.withOpacity(0.5)),
+                                        color: Colors.grey.withValues(alpha:0.5)),
                                   ),
                                 ),
                                 style: GoogleFonts.spaceGrotesk(
@@ -346,7 +346,7 @@ class CartScreen extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.8),
+        backgroundColor: Colors.black.withValues(alpha:0.8),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: 3, // Cart selected
@@ -403,9 +403,9 @@ class CartScreen extends ConsumerWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(alpha:0.6),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(alpha:0.1)),
       ),
       child: Row(
         children: [
@@ -456,7 +456,7 @@ class CartScreen extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha:0.3),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(

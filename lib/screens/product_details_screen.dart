@@ -12,7 +12,7 @@ class ProductDetailsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
-        backgroundColor: Colors.black.withOpacity(0.6),
+        backgroundColor: Colors.black.withValues(alpha:0.6),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.blue),
           onPressed: () => Navigator.pop(context),
@@ -81,7 +81,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF4CD7F6).withOpacity(0.1),
+                    color: const Color(0xFF4CD7F6).withValues(alpha:0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
@@ -133,7 +133,7 @@ class ProductDetailsScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF1B2B3F),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                border: Border.all(color: Colors.grey.withValues(alpha:0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +162,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: Colors.red.withOpacity(0.2),
+                          color: Colors.red.withValues(alpha:0.2),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -205,9 +205,9 @@ class ProductDetailsScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha:0.6),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                border: Border.all(color: Colors.white.withValues(alpha:0.1)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -283,9 +283,9 @@ class ProductDetailsScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha:0.6),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                border: Border.all(color: Colors.white.withValues(alpha:0.1)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -413,7 +413,7 @@ class ProductDetailsScreen extends ConsumerWidget {
         ),
       ],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.8),
+        backgroundColor: Colors.black.withValues(alpha:0.8),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: 1, // Explore selected
@@ -472,7 +472,7 @@ class ProductDetailsScreen extends ConsumerWidget {
       margin: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.withOpacity(0.3)),
+        border: Border.all(color: Colors.grey.withValues(alpha:0.3)),
         image: DecorationImage(
           image: NetworkImage(imageUrl),
           fit: BoxFit.cover,
@@ -490,13 +490,13 @@ class ProductDetailsScreen extends ConsumerWidget {
         shape: BoxShape.circle,
         border: Border.all(
           color:
-              selected ? const Color(0xFF4CD7F6) : Colors.grey.withOpacity(0.3),
+              selected ? const Color(0xFF4CD7F6) : Colors.grey.withValues(alpha:0.3),
           width: selected ? 2 : 1,
         ),
         boxShadow: selected
             ? [
                 BoxShadow(
-                  color: const Color(0xFF4CD7F6).withOpacity(0.3),
+                  color: const Color(0xFF4CD7F6).withValues(alpha:0.3),
                   blurRadius: 8,
                   spreadRadius: 2,
                 )
@@ -511,11 +511,11 @@ class ProductDetailsScreen extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color:
-            selected ? const Color(0xFF0566D9) : Colors.black.withOpacity(0.6),
+            selected ? const Color(0xFF0566D9) : Colors.black.withValues(alpha:0.6),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color:
-              selected ? const Color(0xFF4CD7F6) : Colors.grey.withOpacity(0.3),
+              selected ? const Color(0xFF4CD7F6) : Colors.grey.withValues(alpha:0.3),
         ),
       ),
       child: Text(
@@ -541,9 +541,9 @@ class ProductDetailsScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(alpha:0.6),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(alpha:0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
