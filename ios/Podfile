@@ -10,18 +10,18 @@ project 'Runner', {
 
 def flutter_install_all_ios_pods(flutter_application_path)
   # Install Flutter engine
-  flutter_ios_podfile_setup = File.join(flutter_application_path, '.symlinks', 'flutter', 'ios', 'Flutter.podspec')
-  if File.exist?(flutter_ios_podfile_setup)
+  flutter_podspec = File.join(flutter_application_path, '.symlinks', 'flutter', 'ios', 'Flutter.podspec')
+  if File.exist?(flutter_podspec)
     pod 'Flutter', :path => File.join(flutter_application_path, '.symlinks', 'flutter', 'ios')
   end
 
-  # Parse .flutter-plugins-dependencies to get the plugins
+  # Read .flutter-plugins-dependencies to find iOS plugins
   plugins_file = File.join(flutter_application_path, '..', '.flutter-plugins-dependencies')
   if File.exist?(plugins_file)
     require 'json'
     plugins_json = JSON.parse(File.read(plugins_file))
-    plugins = plugins_json.dig('plugins', 'ios') || []
-    plugins.each do |plugin|
+    ios_plugins = plugins_json['plugins']['ios'] || []
+    ios_plugins.each do |plugin|
       plugin_name = plugin['name']
       plugin_path = File.join(flutter_application_path, '.symlinks', plugin_name, 'ios')
       if File.directory?(plugin_path)
