@@ -1,0 +1,51 @@
+platform :ios, '14.0'
+
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def install_flutter_pods(app_path)
+  # Install Flutter engine
+  flutter_path = File.join(app_path, '.symlinks', 'flutter', 'ios')
+  if File.directory?(flutter_path)
+    pod 'Flutter', :path => flutter_path
+  end
+
+  # Parse .flutter-plugins-dependencies to find iOS plugins
+  deps_file = File.join(app_path, '..', '.flutter-plugins-dependencies')
+  if File.exist?(deps_file)
+    require 'json'
+    deps = JSON.parse(File.read(deps_file))
+    plugins = deps['plugins']['ios'] || []
+    plugins.each do |plugin|
+      name = plugin['name']
+      path = File.join(app_path, '.symlinks', name, 'ios')
+      if File.directory?(path)
+        pod name, :path => path
+      end
+    end
+  else
+    # Fallback: scan .symlinks directory
+    symlinks = File.join(app_path, '.symlinks')
+    if File.directory?(symlinks)
+      Dir.foreach(symlinks) do |entry|
+        next if entry.start_with?('.')
+        path = File.join(symlinks, entry, 'ios')
+        if File.directory?(path)
+          pod entry, :path => path
+        end
+      end
+    end
+  end
+end
+
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+
+  install_flutter_pods(File.dirname(File.realpath(__FILE__)))
+end
