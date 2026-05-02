@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 /// Simple model representing an admin user.
 class AdminUser {
   final String email;
-  const AdminUser(this.email);
+  AdminUser(this.email);
 }
 
 /// AuthService provides methods for admin and customer authentication.
@@ -11,8 +11,15 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // Hard‑coded admin credentials.
-  static const String _adminEmail = 'admin@gmail.com';
-  static const String _adminPassword = '12345678';
+  static String _adminEmail = 'admin@gmail.com';
+  static String _adminPassword = '12345678';
+
+  /// Update admin credentials (email and password).
+  /// This is used after the admin logs in and wishes to change their login details.
+  Future<void> updateAdminCredentials({required String email, required String password}) async {
+    _adminEmail = email;
+    _adminPassword = password;
+  }
 
   /// Stream of auth state changes.
   Stream<User?> authStateChanges() => _auth.authStateChanges();
@@ -22,7 +29,7 @@ class AuthService {
     if (email == _adminEmail && password == _adminPassword) {
       // Sign out any existing Firebase user to keep the state clean.
       await _auth.signOut();
-      return const AdminUser(_adminEmail);
+      return AdminUser(_adminEmail);
     }
     return null;
   }

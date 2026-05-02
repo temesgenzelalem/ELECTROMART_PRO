@@ -3,12 +3,166 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import '../providers.dart';
+import '../services/auth_service.dart';
 
-class ProfileScreen extends ConsumerWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  final _adminEmailController = TextEditingController();
+  final _adminPasswordController = TextEditingController();
+  bool _isUpdating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with current admin email if admin is logged in
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final adminUser = ref.read(adminUserProvider);
+      if (adminUser != null) {
+        _adminEmailController.text = adminUser.email;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _adminEmailController.dispose();
+    _adminPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _updateAdminCredentials() async {
+    if (_adminEmailController.text.isEmpty || _adminPasswordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+    setState(() => _isUpdating = true);
+    try {
+      await ref.read(authServiceProvider).updateAdminCredentials(
+        email: _adminEmailController.text.trim(),
+        password: _adminPasswordController.text,
+      );
+      ref.read(adminUserProvider.notifier).state = AdminUser(_adminEmailController.text.trim());
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Admin credentials updated successfully!')),
+        );
+        _adminPasswordController.clear();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isUpdating = false);
+    }
+  }
+
+  Widget _buildAdminSettings() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.blue.withValues(alpha: 0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Admin Settings',
+            style: GoogleFonts.inter(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _adminEmailController,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              labelText: 'Admin Email',
+              labelStyle: TextStyle(color: Colors.grey[400]),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade700),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              fillColor: Colors.black.withValues(alpha: 0.3),
+              filled: true,
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _adminPasswordController,
+            obscureText: true,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              labelText: 'Admin Password',
+              labelStyle: TextStyle(color: Colors.grey[400]),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade700),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              fillColor: Colors.black.withValues(alpha: 0.3),
+              filled: true,
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _isUpdating ? null : _updateAdminCredentials,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: _isUpdating
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : Text(
+                      'UPDATE CREDENTIALS',
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
       appBar: AppBar(
@@ -153,6 +307,10 @@ class ProfileScreen extends ConsumerWidget {
                 ],
               ),
             ),
+            if (ref.watch(isAdminProvider)) ...[
+              const SizedBox(height: 24),
+              _buildAdminSettings(),
+            ],
             const SizedBox(height: 24),
             // Menu Grid
             GridView.count(
