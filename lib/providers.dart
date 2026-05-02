@@ -1,6 +1,41 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'services/auth_service.dart';
+import 'services/firestore_service.dart';
+import 'models/product_model.dart';
+import 'models/order_model.dart';
 
-// Cart Provider
+// ── Services ────────────────────────────────────────────────────────────────
+final authServiceProvider = Provider<AuthService>((ref) => AuthService());
+
+final firestoreServiceProvider =
+    Provider<FirestoreService>((ref) => FirestoreService());
+
+// ── Auth state ──────────────────────────────────────────────────────────────
+/// Firebase user stream (null if signed out).
+final authStateProvider = StreamProvider<User?>((ref) {
+  return ref.watch(authServiceProvider).authStateChanges();
+});
+
+/// Admin user state (null if not logged in as admin).
+final adminUserProvider = StateProvider<AdminUser?>((ref) => null);
+
+/// True if the current user is the hardcoded admin.
+final isAdminProvider = Provider<bool>((ref) {
+  return ref.watch(adminUserProvider) != null;
+});
+
+// ── Product stream ───────────────────────────────────────────────────────────
+final productsStreamProvider = StreamProvider<List<ProductModel>>((ref) {
+  return ref.watch(firestoreServiceProvider).getProducts();
+});
+
+// ── Orders stream (admin) ──────────────────────────────────────────────────
+final ordersStreamProvider = StreamProvider<List<OrderModel>>((ref) {
+  return ref.watch(firestoreServiceProvider).getOrders();
+});
+
+// ── Cart Provider ───────────────────────────────────────────────────────────
 class CartItem {
   final String id;
   final String name;
@@ -37,8 +72,7 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
   CartNotifier() : super([]);
 
   void addItem(CartItem item) {
-    final existingIndex =
-        state.indexWhere((cartItem) => cartItem.id == item.id);
+    final existingIndex = state.indexWhere((cartItem) => cartItem.id == item.id);
     if (existingIndex >= 0) {
       final existingItem = state[existingIndex];
       state = [
@@ -84,11 +118,12 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
   }
 }
 
-final cartProvider = StateNotifierProvider<CartNotifier, List<CartItem>>((ref) {
+final cartProvider =
+    StateNotifierProvider<CartNotifier, List<CartItem>>((ref) {
   return CartNotifier();
 });
 
-// Wishlist Provider
+// ── Wishlist Provider ───────────────────────────────────────────────────────
 class WishlistNotifier extends StateNotifier<Set<String>> {
   WishlistNotifier() : super({});
 
@@ -109,68 +144,3 @@ final wishlistProvider =
     StateNotifierProvider<WishlistNotifier, Set<String>>((ref) {
   return WishlistNotifier();
 });
-
-// User Provider
-class User {
-  final String id;
-  final String name;
-  final String email;
-  final String? avatarUrl;
-
-  User({
-    required this.id,
-    required this.name,
-    required this.email,
-    this.avatarUrl,
-  });
-}
-
-final userProvider = StateProvider<User?>((ref) => null);
-
-// Products Provider
-class Product {
-  final String id;
-  final String name;
-  final String brand;
-  final double price;
-  final String imageUrl;
-  final List<String> specs;
-  final double rating;
-  final int reviewCount;
-
-  Product({
-    required this.id,
-    required this.name,
-    required this.brand,
-    required this.price,
-    required this.imageUrl,
-    required this.specs,
-    required this.rating,
-    required this.reviewCount,
-  });
-}
-
-final productsProvider = StateProvider<List<Product>>((ref) => [
-      Product(
-        id: '1',
-        name: 'NeuralEdge Workstation Pro X1',
-        brand: 'QuantumLogic',
-        price: 3299.00,
-        imageUrl:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuCVWTeZ03XoXpgUYvPpz9EVzT8WNVqOIhQ5TIzMaFsrg2qg1W1ct6Qg-hnnzCUSlsKNhbuI69PgxlOE9J6FzPTCyKPSQP6W_gSZGll7-4T6VMWhMH5aSbZE7CJXeU1mvqYTkyIZscSP0eP6dvheKH9-hcpnXf2y-rP462ZY3Mht0NBXTPiUjawWPFU5tBfcJCk0KxeXZHaWq2K7T0LZKNLUjs6k7Ux4wAqxV82d8kcrJRC_TPUWIyXSUyFuEAJRtpEYlWp5FrmBipE',
-        specs: ['64GB RAM', 'RTX 4090'],
-        rating: 4.9,
-        reviewCount: 1280,
-      ),
-      Product(
-        id: '2',
-        name: 'Quantum X17 Pro Elite',
-        brand: 'QuantumLogic',
-        price: 3499.99,
-        imageUrl:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuDTUGCAeAm6ulVRNaCNcVkqZ94TLJ5QIWROkxzftxXQA0dd4UGdYWxAeLohLSFPnh2MYzy5195ovipQgVwKxGhqhzVmpY6cOMltCb-uIDQKhbME0jNUBSRhhHA-JwnhzfhnDbdq9vg1Gl_i730r3q-rypLmaEqX2DfqEqv4C1nH9qA9neJm5l2MkMKLxB8LeJeAp5SFqKxg3nhVkZqqRNLeLUWiRXA1B8L1Uz-chAnDZlRYR15WJXnlgaxjCP0XDjwJ2rTlAufmipc',
-        specs: ['RTX 4090', 'i9-13980HX', '64GB DDR5'],
-        rating: 4.9,
-        reviewCount: 1280,
-      ),
-    ]);
