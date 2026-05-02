@@ -3,28 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko</string>
+	<string>AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>YOUR_SENDER_ID</string>
+	<string>403406205912</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.electromartPro</string>
+	<string>com.example.electromart_pro</string>
 	<key>PROJECT_ID</key>
-	<string>electromart</string>
+	<string>electromart-a8e7c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>electromart.appspot.com</string>
+	<string>electromart-a8e7c.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>YOUR_IOS_APP_ID</string>
+	<string>1:403406205912:ios:835f73c49040d67070b8ad</string>
 </dict>
 </plist>

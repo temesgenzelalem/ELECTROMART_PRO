@@ -38,51 +38,51 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    apiKey: 'AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0',
     appId: 'YOUR_WEB_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'electromart',
-    authDomain: 'electromart.firebaseapp.com',
-    storageBucket: 'electromart.appspot.com',
+    messagingSenderId: '403406205912',
+    projectId: 'electromart-a8e7c',
+    authDomain: 'electromart-a8e7c.firebaseapp.com',
+    storageBucket: 'electromart-a8e7c.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
-    appId: 'YOUR_ANDROID_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'electromart',
-    storageBucket: 'electromart.appspot.com',
+    apiKey: 'AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0',
+    appId: '1:403406205912:android:60f195edcff7fd3170b8ad',
+    messagingSenderId: '403406205912',
+    projectId: 'electromart-a8e7c',
+    storageBucket: 'electromart-a8e7c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
-    appId: 'YOUR_IOS_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'electromart',
-    storageBucket: 'electromart.appspot.com',
+    apiKey: 'AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0',
+    appId: '1:403406205912:ios:835f73c49040d67070b8ad',
+    messagingSenderId: '403406205912',
+    projectId: 'electromart-a8e7c',
+    storageBucket: 'electromart-a8e7c.appspot.com',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    apiKey: 'AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0',
     appId: 'YOUR_MACOS_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'electromart',
-    storageBucket: 'electromart.appspot.com',
+    messagingSenderId: '403406205912',
+    projectId: 'electromart-a8e7c',
+    storageBucket: 'electromart-a8e7c.appspot.com',
   );
 
   static const FirebaseOptions linux = FirebaseOptions(
-    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    apiKey: 'AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0',
     appId: 'YOUR_LINUX_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'electromart',
-    storageBucket: 'electromart.appspot.com',
+    messagingSenderId: '403406205912',
+    projectId: 'electromart-a8e7c',
+    storageBucket: 'electromart-a8e7c.appspot.com',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    apiKey: 'AIzaSyBgKnJI3T2mQBdLqUcaQyVFp75OvdnbMz0',
     appId: 'YOUR_WINDOWS_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'electromart',
-    storageBucket: 'electromart.appspot.com',
+    messagingSenderId: '403406205912',
+    projectId: 'electromart-a8e7c',
+    storageBucket: 'electromart-a8e7c.appspot.com',
   );
 }
