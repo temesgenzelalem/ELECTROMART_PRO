@@ -27,9 +27,11 @@ class _FirebaseTestScreenState extends State<FirebaseTestScreen> {
   Future<void> _checkFirebaseStatus() async {
     try {
       // 1. Check Firebase Initialization
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      }
       setState(() => firebaseStatus = '✅ Initialized Successfully');
 
       // 2. Check Auth
