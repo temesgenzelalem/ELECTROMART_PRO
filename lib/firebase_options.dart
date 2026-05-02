@@ -38,52 +38,51 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-    appId: '1:448618578101:web:0b650370bb29e29cac3efc',
-    messagingSenderId: '448618578101',
-    projectId: 'react-native-firebase-testing',
-    authDomain: 'react-native-firebase-testing.firebaseapp.com',
-    storageBucket: 'react-native-firebase-testing.appspot.com',
-    measurementId: 'G-F79DJ0VFGS',
+    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    appId: 'YOUR_WEB_APP_ID',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    projectId: 'electromart',
+    authDomain: 'electromart.firebaseapp.com',
+    storageBucket: 'electromart.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-    appId: '1:448618578101:android:0b650370bb29e29cac3efc',
-    messagingSenderId: '448618578101',
-    projectId: 'react-native-firebase-testing',
-    storageBucket: 'react-native-firebase-testing.appspot.com',
+    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    appId: 'YOUR_ANDROID_APP_ID',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    projectId: 'electromart',
+    storageBucket: 'electromart.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-    appId: '1:448618578101:ios:0b650370bb29e29cac3efc',
-    messagingSenderId: '448618578101',
-    projectId: 'react-native-firebase-testing',
-    storageBucket: 'react-native-firebase-testing.appspot.com',
+    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    appId: 'YOUR_IOS_APP_ID',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    projectId: 'electromart',
+    storageBucket: 'electromart.appspot.com',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-    appId: '1:448618578101:macos:0b650370bb29e29cac3efc',
-    messagingSenderId: '448618578101',
-    projectId: 'react-native-firebase-testing',
-    storageBucket: 'react-native-firebase-testing.appspot.com',
+    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    appId: 'YOUR_MACOS_APP_ID',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    projectId: 'electromart',
+    storageBucket: 'electromart.appspot.com',
   );
 
   static const FirebaseOptions linux = FirebaseOptions(
-    apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-    appId: '1:448618578101:linux:0b650370bb29e29cac3efc',
-    messagingSenderId: '448618578101',
-    projectId: 'react-native-firebase-testing',
-    storageBucket: 'react-native-firebase-testing.appspot.com',
+    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    appId: 'YOUR_LINUX_APP_ID',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    projectId: 'electromart',
+    storageBucket: 'electromart.appspot.com',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-    appId: '1:448618578101:windows:0b650370bb29e29cac3efc',
-    messagingSenderId: '448618578101',
-    projectId: 'react-native-firebase-testing',
-    storageBucket: 'react-native-firebase-testing.appspot.com',
+    apiKey: 'AIzaSyBWwrHy2Z45e9d1J2vhIzRUiFsJ52gWzko',
+    appId: 'YOUR_WINDOWS_APP_ID',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    projectId: 'electromart',
+    storageBucket: 'electromart.appspot.com',
   );
 }
