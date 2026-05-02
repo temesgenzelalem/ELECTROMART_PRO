@@ -144,3 +144,6 @@ final wishlistProvider =
     StateNotifierProvider<WishlistNotifier, Set<String>>((ref) {
   return WishlistNotifier();
 });
+
+// ── Search Query Provider ───────────────────────────────────────────────
+final searchQueryProvider = StateProvider<String>((ref) => '');

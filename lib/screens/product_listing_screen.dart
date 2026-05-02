@@ -6,13 +6,28 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../providers.dart';
 import '../models/product_model.dart';
 
-class ProductListingScreen extends ConsumerWidget {
+class ProductListingScreen extends ConsumerStatefulWidget {
   const ProductListingScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProductListingScreen> createState() => _ProductListingScreenState();
+}
+
+class _ProductListingScreenState extends ConsumerState<ProductListingScreen> {
+  final _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ref = this.ref;
     final productsAsync = ref.watch(productsStreamProvider);
     final cartItems = ref.watch(cartProvider);
+    final searchQuery = ref.watch(searchQueryProvider).toLowerCase();
 
     return Scaffold(
       backgroundColor: const Color(0xFF031427),
@@ -33,27 +48,73 @@ class ProductListingScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.grey),
-            onPressed: () {},
-          ),
-          const CircleAvatar(
-            backgroundColor: Color(0xFF0566D9),
-            child: Icon(Icons.person, color: Colors.white, size: 16),
+          CircleAvatar(
+            backgroundColor: const Color(0xFF0566D9),
+            child: const Icon(Icons.person, color: Colors.white, size: 16.0),
           ),
         ],
       ),
-      body: productsAsync.when(
-        data: (products) => _buildContent(context, ref, products, cartItems),
-        loading: () => const Center(
-          child: CircularProgressIndicator(color: Colors.blue),
-        ),
-        error: (error, _) => Center(
-          child: Text(
-            'Error: $error',
-            style: const TextStyle(color: Colors.red),
+      body: Column(
+        children: [
+          // Search Bar
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              controller: _searchController,
+              onChanged: (value) {
+                ref.read(searchQueryProvider.notifier).state = value;
+              },
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: 'Search products...',
+                hintStyle: TextStyle(color: Colors.grey[600]),
+                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                suffixIcon: searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear, color: Colors.grey),
+                        onPressed: () {
+                          _searchController.clear();
+                          ref.read(searchQueryProvider.notifier).state = '';
+                        },
+                      )
+                    : null,
+                filled: true,
+                fillColor: Colors.black.withValues(alpha:0.6),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Colors.blue),
+                ),
+              ),
+            ),
           ),
-        ),
+          // Product List
+          Expanded(
+            child: productsAsync.when(
+              data: (products) {
+                final filtered = products.where((p) {
+                  if (searchQuery.isEmpty) return true;
+                  return p.name.toLowerCase().contains(searchQuery) ||
+                      p.brand.toLowerCase().contains(searchQuery) ||
+                      p.specs.any((s) => s.toLowerCase().contains(searchQuery));
+                }).toList();
+                return _buildContent(context, ref, filtered, cartItems);
+              },
+              loading: () => const Center(
+                child: CircularProgressIndicator(color: Colors.blue),
+              ),
+              error: (error, _) => Center(
+                child: Text(
+                  'Error: $error',
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black.withValues(alpha:0.8),
