@@ -57,9 +57,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isLoggedIn = authState.value != null || isAdmin;
       final isOnLogin = state.matchedLocation == '/login';
       final isOnSignup = state.matchedLocation == '/signup';
+      final isOnVerifyEmail = state.matchedLocation == '/verify-email';
 
       // Not logged in → go to login.
-      if (!isLoggedIn && !isOnLogin && !isOnSignup) {
+      if (!isLoggedIn && !isOnLogin && !isOnSignup && !isOnVerifyEmail) {
         return '/login';
       }
       // Logged in admin going to login/signup → redirect to admin dashboard.

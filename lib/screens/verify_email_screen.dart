@@ -32,9 +32,11 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
     await user.reload();
     final refreshedUser = FirebaseAuth.instance.currentUser;
     if (refreshedUser != null && refreshedUser.emailVerified) {
-      // Email is verified - proceed to home
+      // Email is verified - redirect to login page
       _timer.cancel();
-      if (mounted) context.go('/');
+      // Sign out so user must login with credentials
+      await FirebaseAuth.instance.signOut();
+      if (mounted) context.go('/login');
     } else {
       // Not verified yet - check again in 3 seconds
       _timer = Timer(const Duration(seconds: 3), _checkVerification);
