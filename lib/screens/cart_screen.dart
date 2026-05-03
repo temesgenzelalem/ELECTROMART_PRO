@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import '../providers.dart';
+import '../services/stripe_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/order_model.dart';
 
@@ -252,43 +253,25 @@ class CartScreen extends ConsumerWidget {
 
   Future<void> _checkout(
       BuildContext context, WidgetRef ref, String userId) async {
-    // Show payment method dialog
-    final paymentMethod = await showDialog<String>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1B2B3F),
-        title: const Text('Select Payment Method', style: TextStyle(color: Colors.white)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.credit_card, color: Colors.blue),
-              title: const Text('Credit Card', style: TextStyle(color: Colors.white)),
-              onTap: () => Navigator.pop(ctx, 'credit_card'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.paypal, color: Colors.blue),
-              title: const Text('PayPal', style: TextStyle(color: Colors.white)),
-              onTap: () => Navigator.pop(ctx, 'paypal'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.money, color: Colors.green),
-              title: const Text('Cash on Delivery', style: TextStyle(color: Colors.white)),
-              onTap: () => Navigator.pop(ctx, 'cod'),
-            ),
-          ],
-        ),
-      ),
-    );
-
-    if (paymentMethod == null) return; // User cancelled
-
     final cartNotifier = ref.read(cartProvider.notifier);
     final items = ref.read(cartProvider);
+    final total = cartNotifier.totalPrice * 1.10;
 
     try {
-      // Simulate payment processing
-      await Future.delayed(const Duration(seconds: 1));
+      // Initialize Stripe (should be called once at app start; we call it here for safety)
+      await StripeService.init();
+
+      // Show Stripe payment sheet
+      final success = await StripeService.makePayment(total, 'usd');
+
+      if (!success) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Payment was cancelled or failed')),
+          );
+        }
+        return;
+      }
 
       final order = OrderModel(
         id: '',
@@ -302,10 +285,10 @@ class CartScreen extends ConsumerWidget {
                   quantity: item.quantity,
                 ))
             .toList(),
-        total: cartNotifier.totalPrice * 1.10,
+        total: total,
         status: 'paid',
         paymentStatus: 'completed',
-        transactionId: 'txn_${DateTime.now().millisecondsSinceEpoch}',
+        transactionId: 'pi_${DateTime.now().millisecondsSinceEpoch}',
         createdAt: Timestamp.now(),
         paymentCompletedAt: Timestamp.now(),
       );
@@ -315,8 +298,7 @@ class CartScreen extends ConsumerWidget {
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Order placed successfully via $paymentMethod!')),
+          const SnackBar(content: Text('Payment successful! Order placed.')),
         );
       }
     } catch (e) {

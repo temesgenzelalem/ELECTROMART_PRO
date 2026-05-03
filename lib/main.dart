@@ -15,6 +15,7 @@ import 'screens/verify_email_screen.dart';
 import 'screens/admin_dashboard.dart';
 import 'screens/admin_profile_screen.dart';
 import 'screens/manage_customers_screen.dart';
+import 'screens/admin_orders_screen.dart';
 import 'screens/add_edit_product_screen.dart';
 import 'firebase_test.dart';
 
