@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'services/auth_service.dart';
 import 'services/firestore_service.dart';
 import 'models/product_model.dart';
@@ -75,7 +76,44 @@ class CartItem {
 }
 
 class CartNotifier extends StateNotifier<List<CartItem>> {
-  CartNotifier() : super([]);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoaded = false;
+
+  CartNotifier() : super([]) {
+    _loadCart();
+  }
+
+  Future<void> _loadCart() async {
+    final user = _auth.currentUser;
+    if (user == null || !user.emailVerified) return;
+    try {
+      final items = await FirestoreService().loadCart(user.uid);
+      state = items;
+      _isLoaded = true;
+    } catch (e) {
+      // ignore load errors
+    }
+  }
+
+  Future<void> _persist() async {
+    final user = _auth.currentUser;
+    if (user == null || !user.emailVerified) return;
+    try {
+      final items = state
+          .map((e) => {
+                'id': e.id,
+                'name': e.name,
+                'imageUrl': e.imageUrl,
+                'price': e.price,
+                'quantity': e.quantity,
+              })
+          .toList();
+      await FirestoreService().saveCart(user.uid, items);
+    } catch (e) {
+      // ignore persist errors
+    }
+  }
 
   void addItem(CartItem item) {
     final existingIndex = state.indexWhere((cartItem) => cartItem.id == item.id);
@@ -89,10 +127,12 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
     } else {
       state = [...state, item];
     }
+    _persist();
   }
 
   void removeItem(String id) {
     state = state.where((item) => item.id != id).toList();
+    _persist();
   }
 
   void updateQuantity(String id, int quantity) {
@@ -109,18 +149,20 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
         ...state.sublist(index + 1),
       ];
     }
+    _persist();
   }
 
   void clearCart() {
     state = [];
+    _persist();
   }
 
   double get totalPrice {
-    return state.fold(0, (sum, item) => sum + (item.price * item.quantity));
+    return state.fold(0.0, (prev, item) => prev + (item.price * item.quantity));
   }
 
   int get itemCount {
-    return state.fold(0, (sum, item) => sum + item.quantity);
+    return state.fold(0, (prev, item) => prev + item.quantity);
   }
 }
 

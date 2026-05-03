@@ -121,6 +121,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const ManageCustomersScreen(),
       ),
       GoRoute(
+        path: '/admin-orders',
+        builder: (context, state) => const AdminOrdersScreen(),
+      ),
+      GoRoute(
         path: '/add-product',
         builder: (context, state) => const AddEditProductScreen(),
       ),

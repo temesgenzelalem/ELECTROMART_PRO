@@ -122,5 +122,10 @@ class FirestoreService {
   Future<void> clearCart(String userId) async {
     await _cartDoc(userId).delete();
   }
+
+  /// Update order status.
+  Future<void> updateOrderStatus(String orderId, String status) async {
+    await ordersRef.doc(orderId).update({'status': status});
+  }
 }
 
