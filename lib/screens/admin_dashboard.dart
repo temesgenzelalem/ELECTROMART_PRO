@@ -33,6 +33,16 @@ class AdminDashboard extends ConsumerWidget {
         ),
         actions: [
           IconButton(
+            icon: const Icon(Icons.person, color: Colors.grey),
+            tooltip: 'Profile',
+            onPressed: () => context.go('/admin-profile'),
+          ),
+          IconButton(
+            icon: const Icon(Icons.people, color: Colors.grey),
+            tooltip: 'Customers',
+            onPressed: () => context.go('/manage-customers'),
+          ),
+          IconButton(
             icon: const Icon(Icons.logout, color: Colors.grey),
             onPressed: () async {
               ref.read(adminUserProvider.notifier).state = null;

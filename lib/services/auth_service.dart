@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Simple model representing an admin user.
 class AdminUser {
@@ -13,6 +14,10 @@ class AuthService {
   // Hard‑coded admin credentials.
   static String _adminEmail = 'admin@gmail.com';
   static String _adminPassword = '12345678';
+
+  // Public getters for admin credentials.
+  String get adminEmail => _adminEmail;
+  String get adminPassword => _adminPassword;
 
   /// Update admin credentials (email and password).
   /// This is used after the admin logs in and wishes to change their login details.
@@ -53,6 +58,12 @@ class AuthService {
     final user = cred.user;
     if (user != null) {
       await user.sendEmailVerification();
+      // Save user data to Firestore
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'email': email,
+        'name': '',
+        'createdAt': Timestamp.now(),
+      });
     }
     return user;
   }

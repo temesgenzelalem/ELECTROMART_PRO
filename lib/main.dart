@@ -13,6 +13,8 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/verify_email_screen.dart';
 import 'screens/admin_dashboard.dart';
+import 'screens/admin_profile_screen.dart';
+import 'screens/manage_customers_screen.dart';
 import 'screens/add_edit_product_screen.dart';
 import 'firebase_test.dart';
 
@@ -109,6 +111,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/admin-dashboard',
         builder: (context, state) => const AdminDashboard(),
+      ),
+      GoRoute(
+        path: '/admin-profile',
+        builder: (context, state) => const AdminProfileScreen(),
+      ),
+      GoRoute(
+        path: '/manage-customers',
+        builder: (context, state) => const ManageCustomersScreen(),
       ),
       GoRoute(
         path: '/add-product',

@@ -4,6 +4,7 @@ import 'services/auth_service.dart';
 import 'services/firestore_service.dart';
 import 'models/product_model.dart';
 import 'models/order_model.dart';
+import 'models/user_model.dart';
 
 // ── Services ────────────────────────────────────────────────────────────────
 final authServiceProvider = Provider<AuthService>((ref) => AuthService());
@@ -33,6 +34,11 @@ final productsStreamProvider = StreamProvider<List<ProductModel>>((ref) {
 // ── Orders stream (admin) ──────────────────────────────────────────────────
 final ordersStreamProvider = StreamProvider<List<OrderModel>>((ref) {
   return ref.watch(firestoreServiceProvider).getOrders();
+});
+
+  // Stream of registered customers.
+final usersStreamProvider = StreamProvider<List<UserModel>>((ref) {
+  return ref.watch(firestoreServiceProvider).getUsers();
 });
 
 // ── Cart Provider ───────────────────────────────────────────────────────────

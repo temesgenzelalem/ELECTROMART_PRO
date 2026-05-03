@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../models/product_model.dart';
 import '../models/order_model.dart';
+import '../models/user_model.dart';
 
 /// Service for interacting with Firestore and Storage.
 class FirestoreService {
@@ -13,6 +14,7 @@ class FirestoreService {
   // Expose collection refs for direct access when needed.
   CollectionReference get productsRef => _firestore.collection('products');
   CollectionReference get ordersRef => _firestore.collection('orders');
+  CollectionReference get usersRef => _firestore.collection('users'); // New collection for customers
   Reference get storageRef => _storage.ref();
   /// Upload product image to Firebase Storage and return download URL.
   Future<String> uploadProductImage(File imageFile, String fileName) async {
@@ -79,4 +81,17 @@ class FirestoreService {
           (snapshot) => snapshot.docs.map((doc) => OrderModel.fromFirestore(doc)).toList(),
         );
   }
+
+  /// Stream of registered customers.
+  Stream<List<UserModel>> getUsers() {
+    return usersRef.snapshots().map(
+      (snapshot) => snapshot.docs.map((doc) => UserModel.fromFirestore(doc)).toList(),
+    );
+  }
+
+  /// Delete a customer document.
+  Future<void> deleteUser(String userId) async {
+    await usersRef.doc(userId).delete();
+  }
 }
+
