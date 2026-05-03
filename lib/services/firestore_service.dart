@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '../models/product_model.dart';
 import '../models/order_model.dart';
 import '../models/user_model.dart';
+import '../providers.dart';
 
 /// Service for interacting with Firestore and Storage.
 class FirestoreService {
@@ -92,6 +93,34 @@ class FirestoreService {
   /// Delete a customer document.
   Future<void> deleteUser(String userId) async {
     await usersRef.doc(userId).delete();
+  }
+
+  /// Cart operations
+  DocumentReference _cartDoc(String userId) => _firestore.collection('carts').doc(userId);
+
+  Future<void> saveCart(String userId, List<Map<String, dynamic>> items) async {
+    await _cartDoc(userId).set({
+      'items': items,
+      'updatedAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
+  Future<List<CartItem>> loadCart(String userId) async {
+    final doc = await _cartDoc(userId).get();
+    if (!doc.exists) return [];
+    final data = doc.data() as Map<String, dynamic>;
+    final items = data['items'] as List<dynamic>? ?? [];
+    return items.map((e) => CartItem(
+      id: e['id'] as String,
+      name: e['name'] as String,
+      imageUrl: e['imageUrl'] as String,
+      price: (e['price'] as num).toDouble(),
+      quantity: e['quantity'] as int,
+    )).toList();
+  }
+
+  Future<void> clearCart(String userId) async {
+    await _cartDoc(userId).delete();
   }
 }
 
