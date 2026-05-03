@@ -35,6 +35,7 @@ class AuthService {
   }
 
   /// Customer login using Firebase Auth.
+  /// Requires email verification for customers.
   Future<User?> loginCustomer({required String email, required String password}) async {
     final cred = await _auth.signInWithEmailAndPassword(email: email, password: password);
     final user = cred.user;
@@ -53,8 +54,6 @@ class AuthService {
     if (user != null) {
       await user.sendEmailVerification();
     }
-    // Do not sign in automatically; require verification first.
-    await _auth.signOut();
     return user;
   }
 

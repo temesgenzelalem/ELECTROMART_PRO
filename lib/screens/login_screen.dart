@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -21,6 +22,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _resendVerificationEmail(String email) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Verification email resent. Please check your inbox.')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _errorMessage = 'Failed to resend verification email.');
+      }
+    }
   }
 
   Future<void> _login() async {
@@ -51,11 +70,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       return;
     }
 
-    // Both failed.
-    setState(() {
-      _errorMessage = 'Invalid credentials or email not verified.';
-      _isLoading = false;
-    });
+    // Both failed – determine if email needs verification.
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null && !currentUser.emailVerified) {
+      setState(() {
+        _errorMessage = 'Please verify your email before logging in.';
+        _isLoading = false;
+      });
+    } else {
+      setState(() {
+        _errorMessage = 'Invalid credentials.';
+        _isLoading = false;
+      });
+    }
   }
 
   @override

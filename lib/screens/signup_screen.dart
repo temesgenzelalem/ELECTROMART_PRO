@@ -16,7 +16,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _confirmController = TextEditingController();
   bool _isLoading = false;
   String? _errorMessage;
-  bool _signupSuccess = false;
 
   @override
   void dispose() {
@@ -55,10 +54,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       await ref
           .read(authServiceProvider)
           .signUpCustomer(email: email, password: password);
-      setState(() {
-        _signupSuccess = true;
-        _isLoading = false;
-      });
+      // Navigate to verification screen on successful signup
+      if (mounted) {
+        context.go('/verify-email');
+      }
     } catch (e) {
       setState(() {
         _errorMessage = 'Sign up failed: $e';
@@ -82,58 +81,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               borderRadius: BorderRadius.circular(24),
               border: Border.all(color: Colors.white.withValues(alpha:0.1)),
             ),
-            child: _signupSuccess
-                ? _buildSuccess()
-                : _buildSignUpForm(),
+            child: _buildSignUpForm(),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildSuccess() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Icon(Icons.check_circle, color: Colors.green, size: 64),
-        const SizedBox(height: 16),
-        Text(
-          'Verification email sent!',
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(color: Colors.white),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Please check your email and verify before logging in.',
-          style: TextStyle(color: Colors.grey[400]),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 24),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () => context.go('/login'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'BACK TO LOGIN',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _buildSignUpForm() {
     return Column(
