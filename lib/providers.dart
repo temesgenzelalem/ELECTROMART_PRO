@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'services/auth_service.dart';
 import 'services/firestore_service.dart';
 import 'models/product_model.dart';
@@ -42,6 +41,11 @@ final usersStreamProvider = StreamProvider<List<UserModel>>((ref) {
   return ref.watch(firestoreServiceProvider).getUsers();
 });
 
+  // Stream of orders for a specific user.
+final userOrdersProvider = StreamProvider.family<List<OrderModel>, String>((ref, userId) {
+  return ref.watch(firestoreServiceProvider).getUserOrders(userId);
+});
+
 // ── Cart Provider ───────────────────────────────────────────────────────────
 class CartItem {
   final String id;
@@ -76,9 +80,7 @@ class CartItem {
 }
 
 class CartNotifier extends StateNotifier<List<CartItem>> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  bool _isLoaded = false;
 
   CartNotifier() : super([]) {
     _loadCart();
@@ -90,7 +92,6 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
     try {
       final items = await FirestoreService().loadCart(user.uid);
       state = items;
-      _isLoaded = true;
     } catch (e) {
       // ignore load errors
     }

@@ -127,5 +127,37 @@ class FirestoreService {
   Future<void> updateOrderStatus(String orderId, String status) async {
     await ordersRef.doc(orderId).update({'status': status});
   }
+
+  /// Get user profile from Firestore.
+  Future<UserModel?> getUserProfile(String userId) async {
+    final doc = await usersRef.doc(userId).get();
+    if (!doc.exists) return null;
+    return UserModel.fromFirestore(doc);
+  }
+
+  /// Update user profile.
+  Future<void> updateUserProfile(String userId, Map<String, dynamic> data) async {
+    await usersRef.doc(userId).set(data, SetOptions(merge: true));
+  }
+
+  /// Get orders for a specific user.
+  Stream<List<OrderModel>> getUserOrders(String userId) {
+    return ordersRef
+        .where('userId', isEqualTo: userId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => OrderModel.fromFirestore(doc)).toList());
+  }
+
+  /// Delete user account and associated data.
+  Future<void> deleteUserAccount(String userId) async {
+    // Delete user document
+    await usersRef.doc(userId).delete();
+    // Delete user's cart
+    await _cartDoc(userId).delete();
+    // Delete user from Firebase Auth (requires admin SDK or cloud function)
+    // For now, just delete Firestore data
+  }
 }
 
