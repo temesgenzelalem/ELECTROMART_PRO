@@ -82,9 +82,12 @@ class ProductDetailsScreen extends ConsumerWidget {
             icon: const Icon(Icons.mic, color: Colors.blue),
             onPressed: () {},
           ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.blue),
-            onPressed: () => context.go('/cart'),
+          Badge(
+            label: Text(ref.watch(cartProvider).fold<int>(0, (sum, item) => sum + item.quantity).toString()),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart, color: Colors.blue),
+              onPressed: () => context.go('/cart'),
+            ),
           ),
         ],
       ),

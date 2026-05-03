@@ -252,10 +252,44 @@ class CartScreen extends ConsumerWidget {
 
   Future<void> _checkout(
       BuildContext context, WidgetRef ref, String userId) async {
+    // Show payment method dialog
+    final paymentMethod = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF1B2B3F),
+        title: const Text('Select Payment Method', style: TextStyle(color: Colors.white)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.credit_card, color: Colors.blue),
+              title: const Text('Credit Card', style: TextStyle(color: Colors.white)),
+              onTap: () => Navigator.pop(ctx, 'credit_card'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.paypal, color: Colors.blue),
+              title: const Text('PayPal', style: TextStyle(color: Colors.white)),
+              onTap: () => Navigator.pop(ctx, 'paypal'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.money, color: Colors.green),
+              title: const Text('Cash on Delivery', style: TextStyle(color: Colors.white)),
+              onTap: () => Navigator.pop(ctx, 'cod'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (paymentMethod == null) return; // User cancelled
+
     final cartNotifier = ref.read(cartProvider.notifier);
     final items = ref.read(cartProvider);
 
     try {
+      // Simulate payment processing
+      await Future.delayed(const Duration(seconds: 1));
+
       final order = OrderModel(
         id: '',
         userId: userId,
@@ -269,11 +303,11 @@ class CartScreen extends ConsumerWidget {
                 ))
             .toList(),
         total: cartNotifier.totalPrice * 1.10,
-        status: 'pending',
-        paymentStatus: 'pending',
-        transactionId: '',
+        status: 'paid',
+        paymentStatus: 'completed',
+        transactionId: 'txn_${DateTime.now().millisecondsSinceEpoch}',
         createdAt: Timestamp.now(),
-        paymentCompletedAt: null,
+        paymentCompletedAt: Timestamp.now(),
       );
 
       await ref.read(firestoreServiceProvider).placeOrder(order);
@@ -281,8 +315,8 @@ class CartScreen extends ConsumerWidget {
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Order placed successfully!')),
+          SnackBar(
+              content: Text('Order placed successfully via $paymentMethod!')),
         );
       }
     } catch (e) {

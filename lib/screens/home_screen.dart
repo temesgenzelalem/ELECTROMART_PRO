@@ -42,6 +42,13 @@ class HomeScreen extends ConsumerWidget {
             icon: const Icon(Icons.search, color: Colors.grey),
             onPressed: () => context.go('/products'),
           ),
+          Badge(
+            label: Text(cartItems.length.toString()),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart, color: Colors.grey),
+              onPressed: () => context.go('/cart'),
+            ),
+          ),
         ],
       ),
       body: productsAsync.when(
